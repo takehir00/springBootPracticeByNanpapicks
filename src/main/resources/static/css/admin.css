@@ -1,0 +1,27 @@
+.admin-header {
+  height: 10vh;
+  background-color: #FFFFCC;
+}
+
+.admin-nav {
+  height: 90vh;
+  width: 10vw;
+  background-color: #FFFFCC;
+  float: left;
+}
+
+.admin-nav-li {
+  padding-top: 4vh;
+  text-align: center;
+}
+
+.admin-content {
+  width: 90vw;
+  height: 90vh;
+  float: left;
+}
+
+.admin-content-title {
+  padding-top: 2vh;
+  padding-left: 2vw;
+}
