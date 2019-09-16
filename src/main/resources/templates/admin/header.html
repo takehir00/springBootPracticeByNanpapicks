@@ -8,8 +8,8 @@
     <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
 </head>
 <body>
-    <div th:insert="~{admin/header :: copy}"></div>
-    <div th:insert="~{admin/nav :: copy}"></div>
-    <div class="admin-content"></div>
+    <div class="admin-header" th:fragment="copy">
+        <p>管理画面</p>
+    </div>
 </body>
 </html>

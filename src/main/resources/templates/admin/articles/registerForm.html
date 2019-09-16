@@ -8,21 +8,23 @@
     <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
 </head>
 <body>
+    <div th:insert="~{admin/header :: copy}"></div>
+    <div th:insert="~{admin/nav :: copy}"></div>
     <div class="admin-content">
         <h1 class="admin-content-title">記事登録フォーム</h1>
         <table>
-            <form method="post" action="/admin/article" th:object="${}">
+            <form method="post" action="/admin/article">
                 <tr>
                     <td><label for="url">遷移先記事URL</label></td>
-                    <td><input type="text" name="url" id="url" th:value="*{}" /></td>
+                    <td><input type="text" name="url" id="url"/></td>
                 </tr>
                 <tr>
                     <td><label for="title">タイトル</label></td>
-                    <td><input type="text" name="title" id="title" th:value="*{}" /></td>
+                    <td><input type="text" name="title" id="title"/></td>
                 </tr>
                 <tr>
                     <td><label for="imageUrl">画像URL</label></td>
-                    <td><input type="text" name="imageUrl" id="imageUrl"  th:value="*{}" /></td>
+                    <td><input type="text" name="imageUrl" id="imageUrl" /></td>
                 </tr>
                 <tr>
                     <td></td>
