@@ -8,6 +8,7 @@
     <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
 </head>
 <body>
+    <div class="flash" th:if="${flash != null}" th:text="${flash}"></div>
     <div th:insert="~{admin/header :: copy}"></div>
     <div th:insert="~{admin/nav :: copy}"></div>
     <div class="admin-content">
@@ -21,13 +22,16 @@
             <th>src</th>
         </tr>
         <tr th:each="article : ${articles}">
-            <td>編集</td>
-            <td>削除</td>
-            <td th:text="${article.id != null}? '${article.id}' : '値がありません'"></td>
+            <td>
+                <a href="articles/editForm.html" th:href="@{/admin/article/edit/{articleId}(articleId=${article.id})}">編集</a>
+            </td>
+            <td>
+                <a href="articles/deleteForm.html" th:href="@{/admin/article/destroy/{articleId}(articleId=${article.id})}">削除</a>
+            </td>
             <td th:text="${article.id}"></td>
-            <td th:text="${article.url}"></td>
-            <td th:text="${article.title}"></td>
-            <td th:text="${article.src}"></td>
+            <td th:text="${article.url != null}? ${article.url} : 'URLがありません'"></td>
+            <td th:text="${article.title != null}? ${article.title} : 'タイトルがありません'"></td>
+            <td th:text="${article.imageUrl != null}? ${article.imageUrl} : '画像URLがありません'"></td>
         </tr>
     </table>
     </div>

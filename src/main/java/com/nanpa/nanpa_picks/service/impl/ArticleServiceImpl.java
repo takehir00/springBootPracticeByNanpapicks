@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -21,11 +22,34 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void create(ArticleForm articleform) {
+    public void create(ArticleForm articleForm) {
         Article article = new Article();
-        article.url = articleform.url;
-        article.title = articleform.title;
-        article.imageUrl = articleform.imageUrl;
+        article.url = articleForm.url;
+        article.title = articleForm.title;
+        article.imageUrl = articleForm.imageUrl;
         articleRepository.save(article);
+    }
+
+    @Override
+    public Optional<Article> getById(Long id) {
+        return articleRepository.findById(id);
+    }
+
+    @Override
+    public void update(ArticleForm articleForm) {
+        Article article = new Article();
+        article.id = articleForm.id;
+        article.url = articleForm.url;
+        article.title = articleForm.title;
+        article.imageUrl = articleForm.imageUrl;
+        articleRepository.saveAndFlush(article);
+    }
+
+    @Override
+    public void delete(ArticleForm articleForm) {
+        Optional<Article> articleOpt = articleRepository.findById(articleForm.id);
+        articleOpt.ifPresent(article -> {
+            articleRepository.delete(articleOpt.get());
+        });
     }
 }

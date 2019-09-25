@@ -10,7 +10,7 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    public long id;
+    public Long id;
 
     @Column
     public String url;

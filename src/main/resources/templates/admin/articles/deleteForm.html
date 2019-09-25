@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nanpa_Picks</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="admin-content">
+    <p>この記事を削除しますか？</p>
+    <form th:method="delete" action="/admin/article/delete" th:object="${articleForm}">
+        <input type="hidden" name="id" th:value="${article.id}"/>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>url</th>
+                <th>title</th>
+                <th>src</th>
+            </tr>
+            <tr>
+                <td th:text="${article.id}"></td>
+                <td th:text="${article.url != null}? ${article.url} : 'URLがありません'"></td>
+                <td th:text="${article.title != null}? ${article.title} : 'タイトルがありません'"></td>
+                <td th:text="${article.imageUrl != null}? ${article.imageUrl} : '画像URLがありません'"></td>
+            </tr>
+        </table>
+        <input type="submit" value="削除する"/>
+    </form>
+</div>
+</body>
+</html>

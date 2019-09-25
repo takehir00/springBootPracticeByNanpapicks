@@ -8,7 +8,7 @@ import javax.persistence.Column;
 
 @Data
 public class ArticleForm {
-    public long id;
+    public Long id;
 
     public String url;
 
