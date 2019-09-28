@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-public class AdminArticleController {
+public class ArticleController {
     @Autowired
     ArticleService articleService;
 
@@ -30,9 +30,7 @@ public class AdminArticleController {
     @Transactional
     @RequestMapping(value = "/admin/article", method = RequestMethod.GET)
     public ModelAndView top(ModelAndView mav) {
-        mav.setViewName("articles/top");
-        List<Article> articles = articleService.getAll();
-        mav.addObject("articles", articles);
+        mav = setArticleTopModelAndView(null);
         return mav;
     }
 
@@ -43,23 +41,21 @@ public class AdminArticleController {
      */
     @RequestMapping(value = "/admin/article/registerForm", method = RequestMethod.GET)
     public ModelAndView registerForm(ModelAndView mav) {
-        mav.setViewName("admin/articles/registerForm");
+        mav.setViewName("articles/registerForm");
         return mav;
     }
 
     /**
      * 記事登録
      *
-     * @param mav
+     * @param articleForm
      * @return
      */
     @Transactional
     @RequestMapping(value = "/admin/article", method = RequestMethod.POST)
-    public ModelAndView register(ModelAndView mav,
-                                 @ModelAttribute("articleForm") ArticleForm articleForm) {
-        mav.setViewName("admin/articles/top");
+    public String register(@ModelAttribute("articleForm") ArticleForm articleForm) {
         articleService.create(articleForm);
-        return mav;
+        return "redirect:/admin/article";
     }
 
     /**
@@ -73,13 +69,12 @@ public class AdminArticleController {
                              @PathVariable Long id) {
         Optional<Article> article = articleService.getById(id);
         if (article.isPresent()) {
-            mav.setViewName("admin/articles/editForm");
-            mav.addObject("article", article);
+            mav.setViewName("articles/editForm");
+            mav.addObject("article", article.get());
             return mav;
         } else {
-            mav.setViewName("admin/articles/top");
             String flash = "該当の記事はありません";
-            mav.addObject(flash);
+            mav = setArticleTopModelAndView(flash);
             return mav;
         }
     }
@@ -87,16 +82,13 @@ public class AdminArticleController {
     /**
      * 記事更新
      *
-     * @param mav
      * @param articleForm
      * @return
      */
     @RequestMapping(value = "/admin/article/update", method = RequestMethod.POST)
-    public ModelAndView update(ModelAndView mav,
-                               @ModelAttribute("articleForm")ArticleForm articleForm) {
-        mav.setViewName("admin/articles/top");
+    public String  update(@ModelAttribute("articleForm")ArticleForm articleForm) {
         articleService.update(articleForm);
-        return mav;
+        return "redirect:/admin/article";
     }
 
     /**
@@ -111,13 +103,12 @@ public class AdminArticleController {
                                    @PathVariable Long id) {
         Optional<Article> article = articleService.getById(id);
         if (article.isPresent()) {
-            mav.setViewName("admin/articles/deleteForm");
+            mav.setViewName("articles/deleteForm");
             mav.addObject("article", article.get());
             return mav;
         } else {
-            mav.setViewName("admin/articles/top");
             String flash = "該当の記事はありません";
-            mav.addObject(flash);
+            mav = setArticleTopModelAndView(flash);
             return mav;
         }
     }
@@ -125,15 +116,26 @@ public class AdminArticleController {
     /**
      * 記事削除
      *
-     * @param mav
      * @param articleForm
      * @return
      */
     @RequestMapping(value = "/admin/article/delete", method = RequestMethod.DELETE)
-    public ModelAndView delete(ModelAndView mav,
-                               @ModelAttribute("articleForm")ArticleForm articleForm) {
-        mav.setViewName("admin/articles/top");
+    public String delete(@ModelAttribute("articleForm")ArticleForm articleForm) {
         articleService.delete(articleForm);
+        return "redirect:/admin/article";
+    }
+
+    /**
+     * 記事TOP画面のModelAndViewを生成
+     *
+     * @return
+     */
+    private ModelAndView setArticleTopModelAndView(String flash) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("articles/top");
+        List<Article> articles = articleService.getAll();
+        mav.addObject("articles", articles);
+        mav.addObject("flash",flash);
         return mav;
     }
 }
