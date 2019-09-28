@@ -1,8 +1,8 @@
-package com.nanpa.nanpa_picks.service;
+package admin.service;
 
-import com.nanpa.nanpa_picks.form.ArticleForm;
-import com.nanpa.nanpa_picks.model.Article;
-import org.springframework.stereotype.Service;
+
+import admin.form.ArticleForm;
+import admin.model.Article;
 
 import java.util.List;
 import java.util.Optional;

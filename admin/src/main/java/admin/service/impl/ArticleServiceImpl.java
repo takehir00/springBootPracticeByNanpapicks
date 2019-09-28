@@ -1,9 +1,10 @@
-package com.nanpa.nanpa_picks.service.impl;
+package admin.service.impl;
 
-import com.nanpa.nanpa_picks.form.ArticleForm;
-import com.nanpa.nanpa_picks.model.Article;
-import com.nanpa.nanpa_picks.repositries.ArticleRepository;
-import com.nanpa.nanpa_picks.service.ArticleService;
+
+import admin.form.ArticleForm;
+import admin.model.Article;
+import admin.repositries.ArticleRepository;
+import admin.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

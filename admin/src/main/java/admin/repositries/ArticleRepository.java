@@ -1,6 +1,7 @@
-package com.nanpa.nanpa_picks.repositries;
+package admin.repositries;
 
-import com.nanpa.nanpa_picks.model.Article;
+
+import admin.model.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

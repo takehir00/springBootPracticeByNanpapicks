@@ -1,4 +1,4 @@
-package com.nanpa.nanpa_picks.form;
+package admin.form;
 
 import lombok.Data;
 import lombok.Getter;
