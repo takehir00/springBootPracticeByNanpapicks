@@ -1,8 +1,9 @@
-package com.nanpa.nanpa_picks.controller;
+package admin.controller;
 
-import com.nanpa.nanpa_picks.form.ArticleForm;
-import com.nanpa.nanpa_picks.model.Article;
-import com.nanpa.nanpa_picks.service.ArticleService;
+
+import admin.form.ArticleForm;
+import admin.model.Article;
+import admin.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,7 +30,7 @@ public class AdminArticleController {
     @Transactional
     @RequestMapping(value = "/admin/article", method = RequestMethod.GET)
     public ModelAndView top(ModelAndView mav) {
-        mav.setViewName("admin/articles/top");
+        mav.setViewName("articles/top");
         List<Article> articles = articleService.getAll();
         mav.addObject("articles", articles);
         return mav;
@@ -55,7 +56,7 @@ public class AdminArticleController {
     @Transactional
     @RequestMapping(value = "/admin/article", method = RequestMethod.POST)
     public ModelAndView register(ModelAndView mav,
-                                 @ModelAttribute("articleForm")ArticleForm articleForm) {
+                                 @ModelAttribute("articleForm") ArticleForm articleForm) {
         mav.setViewName("admin/articles/top");
         articleService.create(articleForm);
         return mav;

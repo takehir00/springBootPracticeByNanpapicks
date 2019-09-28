@@ -1,4 +1,4 @@
-package com.nanpa.nanpa_picks.model;
+package admin.model;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
