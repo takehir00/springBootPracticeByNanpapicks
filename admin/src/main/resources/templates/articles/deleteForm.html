@@ -13,26 +13,28 @@
     <title>Title</title>
 </head>
 <body>
-<div class="admin-content">
-    <p>この記事を削除しますか？</p>
-    <form th:method="delete" action="/admin/article/delete" th:object="${articleForm}">
-        <input type="hidden" name="id" th:value="${article.id}"/>
-        <table>
-            <tr>
-                <th>id</th>
-                <th>url</th>
-                <th>title</th>
-                <th>src</th>
-            </tr>
-            <tr>
-                <td th:text="${article.id}"></td>
-                <td th:text="${article.url != null}? ${article.url} : 'URLがありません'"></td>
-                <td th:text="${article.title != null}? ${article.title} : 'タイトルがありません'"></td>
-                <td th:text="${article.imageUrl != null}? ${article.imageUrl} : '画像URLがありません'"></td>
-            </tr>
-        </table>
-        <input type="submit" value="削除する"/>
-    </form>
-</div>
+    <div th:insert="~{header :: copy}"></div>
+    <div th:insert="~{nav :: copy}"></div>
+    <div class="admin-content">
+        <p>この記事を削除しますか？</p>
+        <form th:method="delete" action="/admin/article/delete" th:object="${articleForm}">
+            <input type="hidden" name="id" th:value="${article.id}"/>
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>url</th>
+                    <th>title</th>
+                    <th>src</th>
+                </tr>
+                <tr>
+                    <td th:text="${article.id}"></td>
+                    <td th:text="${article.url != null}? ${article.url} : 'URLがありません'"></td>
+                    <td th:text="${article.title != null}? ${article.title} : 'タイトルがありません'"></td>
+                    <td th:text="${article.imageUrl != null}? ${article.imageUrl} : '画像URLがありません'"></td>
+                </tr>
+            </table>
+            <input type="submit" value="削除する"/>
+        </form>
+    </div>
 </body>
 </html>
