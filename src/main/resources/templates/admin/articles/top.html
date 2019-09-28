@@ -8,25 +8,9 @@
     <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
 </head>
 <body>
-    <header class="admin-header">
-        <p>管理画面</p>
-    </header>
-    <nav class="admin-nav">
-        <ul>
-            <li class="admin-nav-li">
-                記事一覧
-            </li>
-            <li class="admin-nav-li">
-                記事登録
-            </li>
-            <li class="admin-nav-li">
-                ユーザー一覧
-            </li>
-            <li class="admin-nav-li">
-                ユーザー登録
-            </li>
-        </ul>
-    </nav>
+    <div class="flash" th:if="${flash != null}" th:text="${flash}"></div>
+    <div th:insert="~{admin/header :: copy}"></div>
+    <div th:insert="~{admin/nav :: copy}"></div>
     <div class="admin-content">
     <table>
         <tr>
@@ -37,13 +21,17 @@
             <th>title</th>
             <th>src</th>
         </tr>
-        <tr>
-            <td>編集</td>
-            <td>削除</td>
-            <td>1</td>
-            <td>https://woman.mynavi.jp/article/190130-4/	</td>
-            <td>ナンパ師が伝授！イケメンじゃなくても出会いが作れるナンパ術	</td>
-            <td>画像のurlが入るよ</td>
+        <tr th:each="article : ${articles}">
+            <td>
+                <a href="articles/editForm.html" th:href="@{/admin/article/edit/{articleId}(articleId=${article.id})}">編集</a>
+            </td>
+            <td>
+                <a href="articles/deleteForm.html" th:href="@{/admin/article/destroy/{articleId}(articleId=${article.id})}">削除</a>
+            </td>
+            <td th:text="${article.id}"></td>
+            <td th:text="${article.url != null}? ${article.url} : 'URLがありません'"></td>
+            <td th:text="${article.title != null}? ${article.title} : 'タイトルがありません'"></td>
+            <td th:text="${article.imageUrl != null}? ${article.imageUrl} : '画像URLがありません'"></td>
         </tr>
     </table>
     </div>

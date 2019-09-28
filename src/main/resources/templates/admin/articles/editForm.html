@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nanpa_Picks</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<body>
+<div th:insert="~{admin/header :: copy}"></div>
+<div th:insert="~{admin/nav :: copy}"></div>
+<div class="admin-content">
+    <h1 class="admin-content-title">記事編集フォーム</h1>
+    <table>
+        <form method="post" action="/admin/article/update" th:object="${articleForm}">
+            <input type="hidden" name="id" th:value="${article.id}"/>
+            <tr>
+                <td><label for="url">遷移先記事URL</label></td>
+                <td><input type="text" name="url" id="url" th:value="${article.url}"/></td>
+            </tr>
+            <tr>
+                <td><label for="title">タイトル</label></td>
+                <td><input type="text" name="title" id="title" th:value="${article.title}"/></td>
+            </tr>
+            <tr>
+                <td><label for="imageUrl">画像URL</label></td>
+                <td><input type="text" name="imageUrl" id="imageUrl" th:value="${article.imageUrl}"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" /></td>
+            </tr>
+        </form>
+    </table>
+</div>
+</body>
+</html>

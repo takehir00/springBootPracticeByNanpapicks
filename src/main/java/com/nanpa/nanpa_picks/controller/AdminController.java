@@ -1,4 +1,4 @@
-package com.nanpa.nanpa_picks.controllers;
+package com.nanpa.nanpa_picks.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
