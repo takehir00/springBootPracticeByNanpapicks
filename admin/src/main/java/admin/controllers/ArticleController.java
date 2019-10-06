@@ -1,9 +1,9 @@
-package admin.controller;
+package admin.controllers;
 
 
-import admin.form.ArticleForm;
-import admin.model.Article;
-import admin.service.ArticleService;
+import admin.forms.ArticleForm;
+import admin.models.Article;
+import admin.services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;

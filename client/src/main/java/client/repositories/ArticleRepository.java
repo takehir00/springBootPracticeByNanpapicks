@@ -1,7 +1,6 @@
-package admin.repositries;
+package client.repositories;
 
-
-import admin.models.Article;
+import client.models.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

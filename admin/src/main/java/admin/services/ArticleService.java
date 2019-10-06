@@ -1,8 +1,8 @@
-package admin.service;
+package admin.services;
 
 
-import admin.form.ArticleForm;
-import admin.model.Article;
+import admin.forms.ArticleForm;
+import admin.models.Article;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,10 +1,10 @@
-package admin.service.impl;
+package admin.services.impl;
 
 
-import admin.form.ArticleForm;
-import admin.model.Article;
+import admin.forms.ArticleForm;
+import admin.models.Article;
 import admin.repositries.ArticleRepository;
-import admin.service.ArticleService;
+import admin.services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

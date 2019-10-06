@@ -10,17 +10,22 @@
 </head>
 <body>
     <div th:insert="~{header :: copy}"></div>
+
     <div class="contents container">
-        <div class="articles row">
-            <div class="article col-sm-3" th:each="article : ${articles}">
-                <img class="article-image col-sm-12" th:src="${article.imageUrl}" th:height="100" th:width="100"/>
-                <a class="article-title col-sm-12" th:text="${article.title}" href="articles/show.html" th:href="@{/article/{articleId}(articleId=${article.id})}"></a>
+        <div class="selected-article">
+            <div class="row">
+                <div class="selected-article-image col-sm-12">
+                    <img th:src="${article.imageUrl}" th:height="100" th:width="100"/>
+                </div>
+                <div class="selected-article-title col-sm-12" th:text="${article.title}"></div>
+
+                <div class="selected-article-next col-sm-12">
+                    <a th:href="@{${article.url}}">続きを読む</a>
+                </div>
             </div>
         </div>
-        <div class="articles-pagination">
-            ページネーション
-        </div>
     </div>
+
     <div th:insert="~{footer :: copy}"></div>
 </body>
 </html>

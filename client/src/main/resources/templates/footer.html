@@ -4,12 +4,12 @@
     <title>Nanpa_Picks</title>
     <meta http-equiv="Content-Type"
           content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" media="all" th:href="@{/css/admin.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
     <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
 </head>
 <body>
-    <div th:insert="~{header :: copy}"></div>
-    <div th:insert="~{nav :: copy}"></div>
-    <div class="admin-content"></div>
+    <footer th:fragment="copy">
+        Nanpa Picksについて
+    </footer>
 </body>
 </html>
