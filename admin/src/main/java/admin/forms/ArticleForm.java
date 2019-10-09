@@ -1,10 +1,6 @@
-package admin.form;
+package admin.forms;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.persistence.Column;
 
 @Data
 public class ArticleForm {

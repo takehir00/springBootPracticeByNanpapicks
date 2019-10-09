@@ -1,0 +1,72 @@
+//記事一覧
+.articles {
+  // height: 130vh;
+  width: 70vw;
+  margin: auto;
+}
+
+.article {
+  // height: 20vh;
+  // width: 15vw;
+  border: solid 1px;
+  margin: 3vh 2vw;
+  text-align: center;
+  // margin-top: 40px;
+  // margin-left: 6vw;
+  // float: left;
+}
+
+.article-image {
+  margin: 0 auto;
+
+}
+
+.articles-pagination {
+  clear: both;
+}
+
+.pagination {
+  // position: relative;
+  // right: 0;
+}
+
+//記事詳細
+.selected-article {
+  border: solid 1px;
+  width: 40vw;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.selected-article-image {
+  text-align: center;
+}
+
+.selected-article-title {
+  text-align: center;
+}
+
+.selected-article-next {
+  text-align: center;
+}
+
+.comment-form {
+  padding-top: 2vh;
+  // padding-left: 8vw;
+  // width: 50vw;
+}
+
+.comments {
+  border: solid 1px;
+  width: 40vw;
+  margin: 3vh auto;
+  background-color: white;
+}
+
+.comment {
+  margin-top: 1vh;
+}
+
+.btn {
+  // padding:1px 0px;
+}
