@@ -14,6 +14,9 @@ public class UserController {
         return mav;
     }
 
+    @RequestMapping(value = "admin/user", method = RequestMethod.POST)
+    public ModelAndView create(ModelAndView mav) {
+
         return mav;
     }
 }
