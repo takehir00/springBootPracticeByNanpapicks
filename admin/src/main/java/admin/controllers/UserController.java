@@ -10,6 +10,9 @@ public class UserController {
 
     @RequestMapping(value = "/admin/user/registerForm", method = RequestMethod.GET)
     public ModelAndView registerForm(ModelAndView mav) {
+        mav.setViewName("users/registerForm");
+        return mav;
+    }
 
         return mav;
     }
