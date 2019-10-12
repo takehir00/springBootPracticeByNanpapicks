@@ -13,7 +13,7 @@
 <div class="admin-content">
     <h1 class="admin-content-title">ユーザー登録フォーム</h1>
     <table>
-        <form method="post" action="/admin/article" th:object="${articleForm}">
+        <form method="post" action="/admin/user" th:object="${userForm}">
             <tr>
                 <td><label for="name">名前</label></td>
                 <td><input type="text" name="name" id="name" /></td>
@@ -23,8 +23,12 @@
                 <td><input type="text" name="mail" id="mail"/></td>
             </tr>
             <tr>
+                <td><label for="imageUrl">画像URL</label></td>
+                <td><input type="text" name="imageUrl" id="imageUrl"/></td>
+            </tr>
+            <tr>
                 <td><label for="password">パスワード</label></td>
-                <td><input type="text" name="imageUrl" id="password"/></td>
+                <td><input type="text" name="password" id="password"/></td>
             </tr>
             <tr>
                 <td></td>

@@ -4,21 +4,20 @@ import javax.persistence.*;
 
 @Entity
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     public Long id;
 
     @Column
-    String name;
+    public String name;
 
     @Column
-    String imageName;
+    public String mail;
 
     @Column
-    String passWord;
+    public String imageUrl;
 
     @Column
-    String email;
+    public String password;
 }
