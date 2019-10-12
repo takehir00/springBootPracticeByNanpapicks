@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -21,5 +23,11 @@ public class UserServiceImpl implements UserService {
         user.imageUrl = userForm.imageUrl;
         user.password = userForm.password;
         userRepository.save(user);
+    }
+
+    @Override
+    public List<User> getAll() {
+        List<User> users = userRepository.findAll();
+        return users;
     }
 }

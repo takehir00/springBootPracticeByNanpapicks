@@ -20,7 +20,8 @@ public class UserController {
     @RequestMapping(value = "admin/user", method = RequestMethod.GET)
     public ModelAndView top(ModelAndView mav) {
         mav.setViewName("users/top");
-        List<User> userList = userService.getAll();
+        List<User> users = userService.getAll();
+        mav.addObject("users", users);
         return mav;
     }
 
