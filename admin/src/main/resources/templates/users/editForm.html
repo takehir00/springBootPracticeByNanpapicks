@@ -13,7 +13,7 @@
 <div class="admin-content">
     <h1 class="admin-content-title">ユーザー編集フォーム</h1>
     <table>
-        <form method="post" action="/admin/user" th:object="${userForm}">
+        <form method="post" action="/admin/user/update" th:object="${userForm}">
             <input type="hidden" name="id" th:value="${user.id}" />
             <tr>
                 <td><label for="name">名前</label></td>

@@ -64,7 +64,7 @@ public class UserController {
      * @param userId
      * @return
      */
-    @RequestMapping(value = "/admin/user/editForm/{userId}")
+    @RequestMapping(value = "/admin/user/editForm/{userId}", method = RequestMethod.GET)
     public ModelAndView editForm(ModelAndView mav,
                                  @PathVariable Long userId) {
         Optional<User> userOpt = userService.getById(userId);
@@ -80,5 +80,11 @@ public class UserController {
             mav.addObject("flash", flash);
             return mav;
         }
+    }
+
+    @RequestMapping(value = "/admin/user/update", method = RequestMethod.POST)
+    public String update(@ModelAttribute("userForm")UserForm userForm) {
+        userService.update(userForm);
+        return "redirect:/admin/user";
     }
 }

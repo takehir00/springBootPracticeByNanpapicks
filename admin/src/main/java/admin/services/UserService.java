@@ -28,4 +28,11 @@ public interface UserService {
      * @return ユーザー
      */
     Optional<User> getById(Long id);
+
+    /**
+     * ユーザー更新
+     *
+     * @param userForm
+     */
+    void update(UserForm userForm);
 }
