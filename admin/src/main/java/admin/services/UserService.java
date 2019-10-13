@@ -35,4 +35,11 @@ public interface UserService {
      * @param userForm
      */
     void update(UserForm userForm);
+
+    /**
+     * ユーザー削除
+     *
+     * @param userForm
+     */
+    void delete(UserForm userForm);
 }

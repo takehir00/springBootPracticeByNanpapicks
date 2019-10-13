@@ -94,7 +94,34 @@ public class UserController {
         return "redirect:/admin/user";
     }
 
-    public ModelAndView destroy(ModelAndView mav) {
-        return mav;
+    /**
+     * 削除画面
+     *
+     * @param mav
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/admin/user/destroy/{userId}")
+    public ModelAndView destroy(ModelAndView mav,
+                                @PathVariable Long userId) {
+        Optional<User> userOpt = userService.getById(userId);
+        if (userOpt.isPresent()) {
+            mav.setViewName("/users/deleteForm");
+            mav.addObject("user", userOpt.get());
+            return mav;
+        } else {
+            String flash = "該当のユーザーはありません";
+            mav.setViewName("users/top");
+            List<User> users = userService.getAll();
+            mav.addObject("users", users);
+            mav.addObject("flash", flash);
+            return mav;
+        }
+    }
+
+    @RequestMapping(value = "/admin/user", method = RequestMethod.DELETE)
+    public String delete(@ModelAttribute("userForm")UserForm userForm) {
+        userService.delete(userForm);
+        return "redirect:/admin/user";
     }
 }

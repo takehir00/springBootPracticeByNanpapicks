@@ -46,4 +46,12 @@ public class UserServiceImpl implements UserService {
         user.password = userForm.password;
         userRepository.saveAndFlush(user);
     }
+
+    @Override
+    public void delete(UserForm userForm) {
+       Optional<User> userOpt = userRepository.findById(userForm.id);
+       userOpt.ifPresent(user -> {
+           userRepository.delete(user);
+       });
+    }
 }
