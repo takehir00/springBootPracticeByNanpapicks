@@ -94,5 +94,7 @@ public class UserController {
         return "redirect:/admin/user";
     }
 
-
+    public ModelAndView destroy(ModelAndView mav) {
+        return mav;
+    }
 }
