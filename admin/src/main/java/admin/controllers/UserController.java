@@ -58,14 +58,14 @@ public class UserController {
     }
 
     /**
-     * ユーザー編集画面
+     * 編集フォーム
      *
      * @param mav
      * @param userId
      * @return
      */
-    @RequestMapping(value = "/admin/user/editForm/{userId}", method = RequestMethod.GET)
-    public ModelAndView editForm(ModelAndView mav,
+    @RequestMapping(value = "/admin/user/edit/{userId}", method = RequestMethod.GET)
+    public ModelAndView edit(ModelAndView mav,
                                  @PathVariable Long userId) {
         Optional<User> userOpt = userService.getById(userId);
         if (userOpt.isPresent()) {
@@ -82,9 +82,17 @@ public class UserController {
         }
     }
 
+    /**
+     * 更新
+     *
+     * @param userForm
+     * @return
+     */
     @RequestMapping(value = "/admin/user/update", method = RequestMethod.POST)
     public String update(@ModelAttribute("userForm")UserForm userForm) {
         userService.update(userForm);
         return "redirect:/admin/user";
     }
+
+
 }
