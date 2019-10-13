@@ -22,7 +22,7 @@ public class ArticleController {
     ArticleService articleService;
 
     /**
-     * 記事管理画面TOP
+     * 一覧画面
      *
      * @param mav
      * @return
@@ -35,7 +35,7 @@ public class ArticleController {
     }
 
     /**
-     * 記事登録画面
+     * 登録画面
      *
      * @return
      */
@@ -46,7 +46,7 @@ public class ArticleController {
     }
 
     /**
-     * 記事登録
+     * 登録
      *
      * @param articleForm
      * @return
@@ -80,7 +80,7 @@ public class ArticleController {
     }
 
     /**
-     * 記事更新
+     * 更新
      *
      * @param articleForm
      * @return
@@ -114,7 +114,7 @@ public class ArticleController {
     }
 
     /**
-     * 記事削除
+     * 削除
      *
      * @param articleForm
      * @return
