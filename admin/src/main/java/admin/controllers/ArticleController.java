@@ -2,7 +2,7 @@ package admin.controllers;
 
 
 import admin.forms.ArticleForm;
-import admin.models.Article;
+import db.models.Article;
 import admin.services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

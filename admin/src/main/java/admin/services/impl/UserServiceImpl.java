@@ -1,16 +1,20 @@
 package admin.services.impl;
 
 import admin.forms.UserForm;
-import admin.models.User;
-import admin.repositries.UserRepository;
+import db.models.User;
+import db.repositries.UserRepository;
 import admin.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@EntityScan(basePackageClasses = User.class)
+@EnableJpaRepositories(basePackageClasses = User.class)
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
@@ -26,13 +30,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll() {
+    public List<db.models.User> getAll() {
         List<User> users = userRepository.findAll();
         return users;
     }
 
     @Override
-    public Optional<User> getById(Long id) {
+    public Optional<db.models.User> getById(Long id) {
         return userRepository.findById(id);
     }
 

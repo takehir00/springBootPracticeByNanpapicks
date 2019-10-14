@@ -1,6 +1,6 @@
-package admin.repositries;
+package db.repositries;
 
-import admin.models.User;
+import db.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,6 @@
-package client.models;
-
+package db.models;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Article {

@@ -1,7 +1,7 @@
 package admin.controllers;
 
 import admin.forms.UserForm;
-import admin.models.User;
+import db.models.User;
 import admin.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ public class UserController {
      * @param mav
      * @return
      */
-    @RequestMapping(value = "admin/user", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/user", method = RequestMethod.GET)
     public ModelAndView top(ModelAndView mav) {
         mav.setViewName("users/top");
         List<User> users = userService.getAll();
@@ -119,6 +119,12 @@ public class UserController {
         }
     }
 
+    /**
+     * 削除
+     *
+     * @param userForm
+     * @return
+     */
     @RequestMapping(value = "/admin/user", method = RequestMethod.DELETE)
     public String delete(@ModelAttribute("userForm")UserForm userForm) {
         userService.delete(userForm);

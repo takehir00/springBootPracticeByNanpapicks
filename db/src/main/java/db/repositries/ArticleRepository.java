@@ -1,7 +1,7 @@
-package admin.repositries;
+package db.repositries;
 
 
-import admin.models.Article;
+import db.models.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
