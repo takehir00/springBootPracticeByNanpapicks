@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nanpa_Picks</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<body>
+<div th:insert="~{header :: copy}"></div>
+<div th:insert="~{nav :: copy}"></div>
+<div class="admin-content">
+    <h1 class="admin-content-title">ユーザー登録フォーム</h1>
+    <table>
+        <form method="post" action="/admin/user" th:object="${userForm}">
+            <tr>
+                <td><label for="name">名前</label></td>
+                <td><input type="text" name="name" id="name" /></td>
+            </tr>
+            <tr>
+                <td><label for="mail">メールアドレス</label></td>
+                <td><input type="text" name="mail" id="mail"/></td>
+            </tr>
+            <tr>
+                <td><label for="imageUrl">画像URL</label></td>
+                <td><input type="text" name="imageUrl" id="imageUrl"/></td>
+            </tr>
+            <tr>
+                <td><label for="password">パスワード</label></td>
+                <td><input type="text" name="password" id="password"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" /></td>
+            </tr>
+        </form>
+    </table>
+</div>
+</body>
+</html>

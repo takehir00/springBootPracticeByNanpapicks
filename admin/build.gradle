@@ -42,4 +42,7 @@ dependencies {
     compile group: 'org.webjars', name: 'bootstrap', version: '4.3.1'
     compileOnly 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
+    // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
+    compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.5'
+
 }
