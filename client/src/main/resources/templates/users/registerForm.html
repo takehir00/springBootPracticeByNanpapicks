@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nanpa_Picks</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/articles.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<body>
+<div th:insert="~{header :: copy}"></div>
+
+<div class="contents">
+    <div class="login">
+        <h1>ユーザー登録</h1>
+        <div class="form">
+            <form method="post" action="/admin/user" th:object="${userForm}">
+                <div class="form-group login-form">
+                    <label for="name">名前</label>
+                    <input class="form-control" type="text" name="name" id="name" />
+                </div>
+                <div class="form-group login-form">
+                    <label for="mail">メールアドレス</label>
+                    <input class="form-control" type="mail" name="mail" id="mail" />
+                </div>
+                <div class="form-group login-form">
+                    <label for="password">パスワード</label>
+                    <input class="form-control" type="password" name="mail" id="password" />
+                </div>
+                <div class="form-group login-form">
+                    <label for="password_confirmation">パスワード</label>
+                    <input class="form-control" type="password_confirmation" name="password__confirmation" id="password_confirmation" />
+                </div>
+                <input class="btn btn-primary login-btn" type="submit" value="登録" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:insert="~{footer :: copy}"></div>
+</body>
+</html>
