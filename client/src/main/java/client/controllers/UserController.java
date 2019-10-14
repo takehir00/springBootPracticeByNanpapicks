@@ -58,6 +58,9 @@ public class UserController {
             mav.addObject("user",userOpt.get());
             return mav;
         } else {
+            mav.setViewName("/articles/index");
+            String flash = "該当のユーザーはありません";
+            mav.addObject("flash", flash);
             return mav;
         }
     }
