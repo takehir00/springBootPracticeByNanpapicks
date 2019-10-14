@@ -10,6 +10,8 @@ public class UserForm {
 
     public String mail;
 
+    public String introduction;
+
     public String imageUrl;
 
     public String password;

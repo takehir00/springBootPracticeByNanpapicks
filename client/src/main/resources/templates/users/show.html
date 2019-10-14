@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nanpa_Picks</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/articles.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/users.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<body>
+<div th:insert="~{header :: copy}"></div>
+
+<div class="contents container">
+    <div class="user-details">
+        <div class="row">
+            <div class="user-image col-sm-12">
+                <img class="user-image-tag" th:src="${user.imageUrl}" th:height="100" th:width="100"/>
+            </div>
+            <div class="user-name col-sm-12" th:text="${user.name}"></div>
+            <div class="user-introduction col-sm-12" th:text="${user.introduction}"></div>
+            <div class="user-edit col-sm-12">
+                <a href="users/editForm.html" th:href="@{/user/edit/{userId}(userId=${user.id})}">アカウント編集</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:insert="~{footer :: copy}"></div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+//ユーザー詳細画面
+.title {
+  margin-bottom: 1vh;
+}
+
+.user-details {
+  border: solid 1px;
+  width: 30vw;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.user-image {
+  text-align: center;
+}
+
+.user-image-tag {
+
+}
+
+.user-name {
+  text-align: center;
+}
+
+.user-introduction {
+  text-align: center;
+}
+
+.user-edit {
+  text-align: center;
+}
+
+.user-articles {
+  width: 30vw;
+  margin: 0 auto;
+}
+
+.user-articles-title {
+  margin-top: 2vh;
+}
+
+.user-article {
+  margin-top: 2vh;
+}
+
+.user-article-title {
+  // margin-top:;
+}
+
+//ログイン
+.login {
+  width: 60vw;
+  margin: 0 auto;
+}
+
+.login-form {
+  width: 50vw;
+  // margin: 0 auto;
+}
+
+.login-btn {
+  margin: 0 auto;
+}
+
+// .form {
+//   margin: 0 auto;
+// }

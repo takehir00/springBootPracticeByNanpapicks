@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.name = userForm.name;
         user.mail = userForm.mail;
+        user.introduction = userForm.introduction;
         user.imageUrl = userForm.imageUrl;
         user.password = userForm.password;
         userRepository.save(user);
@@ -46,6 +47,7 @@ public class UserServiceImpl implements UserService {
         user.id = userForm.id;
         user.name = userForm.name;
         user.mail = userForm.mail;
+        user.introduction = userForm.introduction;
         user.imageUrl = userForm.imageUrl;
         user.password = userForm.password;
         userRepository.saveAndFlush(user);

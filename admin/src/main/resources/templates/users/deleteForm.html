@@ -24,6 +24,7 @@
                 <th>id</th>
                 <th>名前</th>
                 <th>メールアドレス</th>
+                <th>introduction</th>
                 <th>画像URL</th>
                 <th>パスワード</th>
             </tr>
@@ -31,6 +32,7 @@
                 <td th:text="${user.id}"></td>
                 <td th:text="${user.name != null}? ${user.name} : 'URLがありません'"></td>
                 <td th:text="${user.mail != null}? ${user.mail} : 'メールアドレスがありません'"></td>
+                <td th:text="${user.introduction != null}? ${user.introduction} : '自己紹介がありません'"></td>
                 <td th:text="${user.imageUrl != null}? ${user.imageUrl} : '画像URLがありません'"></td>
                 <td th:text="${user.password != null}? ${user.password} : 'パスワードがありません'"></td>
             </tr>
