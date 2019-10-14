@@ -1,9 +1,10 @@
 package client.controllers;
 
+import client.forms.UserForm;
+import client.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -11,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class UserController {
+    @Autowired
+    UserService userService;
 
     /**
      * 登録画面
@@ -22,5 +25,17 @@ public class UserController {
     public ModelAndView registerForm(ModelAndView mav) {
         mav.setViewName("users/registerForm");
         return mav;
+    }
+
+    /**
+     * 登録
+     *
+     * @param userForm
+     * @return
+     */
+    @PostMapping(value = "user")
+    public String create(@ModelAttribute("userForm")UserForm userForm) {
+        userService.create(userForm);
+        return "redirect:/";
     }
 }
