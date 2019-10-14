@@ -1,4 +1,4 @@
-package admin.models;
+package db.models;
 
 import javax.persistence.*;
 
