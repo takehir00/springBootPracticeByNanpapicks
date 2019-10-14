@@ -24,7 +24,7 @@
         </tr>
         <tr th:each="user : ${users}">
             <td>
-                <a href="users/editForm.html" th:href="@{/admin/user/editForm/{userId}(userId=${user.id})}">編集</a>
+                <a href="users/editForm.html" th:href="@{/admin/user/edit/{userId}(userId=${user.id})}">編集</a>
             </td>
             <td>
                 <a href="users/deleteForm.html" th:href="@{/admin/user/destroy/{userId}(userId=${user.id})}">削除</a>

@@ -25,7 +25,7 @@ public class UserController {
      * @param mav
      * @return
      */
-    @RequestMapping(value = "admin/user", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/user", method = RequestMethod.GET)
     public ModelAndView top(ModelAndView mav) {
         mav.setViewName("users/top");
         List<User> users = userService.getAll();
