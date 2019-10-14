@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @EntityScan(basePackageClasses = User.class)
 @EnableJpaRepositories(basePackageClasses = User.class)
@@ -26,5 +28,10 @@ public class UserServiceImpl implements UserService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.password = encoder.encode(userForm.password);
         userRepository.save(user);
+    }
+
+    @Override
+    public Optional<User> getById(Long userId) {
+        return userRepository.findById(userId);
     }
 }
