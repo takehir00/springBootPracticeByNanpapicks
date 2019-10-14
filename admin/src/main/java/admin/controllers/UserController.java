@@ -119,6 +119,12 @@ public class UserController {
         }
     }
 
+    /**
+     * 削除
+     *
+     * @param userForm
+     * @return
+     */
     @RequestMapping(value = "/admin/user", method = RequestMethod.DELETE)
     public String delete(@ModelAttribute("userForm")UserForm userForm) {
         userService.delete(userForm);
