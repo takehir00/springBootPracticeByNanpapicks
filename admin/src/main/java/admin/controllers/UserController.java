@@ -14,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * ユーザーコントローラ
+ */
 @Controller
 public class UserController {
     @Autowired
