@@ -16,6 +16,9 @@ public class User {
     public String mail;
 
     @Column
+    public String introduction;
+
+    @Column
     public String imageUrl;
 
     @Column
