@@ -42,6 +42,13 @@ public class UserController {
         return "redirect:/";
     }
 
+    /**
+     * 詳細画面
+     *
+     * @param mav
+     * @param userId
+     * @return
+     */
     @GetMapping(value = "user/{userId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Long userId) {
