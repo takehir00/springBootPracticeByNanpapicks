@@ -35,4 +35,17 @@ public class UserServiceImpl implements UserService {
     public Optional<User> getById(Long userId) {
         return userRepository.findById(userId);
     }
+
+    @Override
+    public void update(UserForm userForm) {
+        User user = new User();
+        user.id = userForm.id;
+        user.name = userForm.name;
+        user.mail = userForm.mail;
+        user.imageUrl = userForm.imageUrl;
+        user.introduction = userForm.introduction;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.password = encoder.encode(userForm.password);
+        userRepository.saveAndFlush(user);
+    }
 }

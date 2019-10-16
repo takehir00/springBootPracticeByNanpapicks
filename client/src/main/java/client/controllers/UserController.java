@@ -59,9 +59,44 @@ public class UserController {
             return mav;
         } else {
             mav.setViewName("/articles/index");
-            String flash = "該当のユーザーはありません";
+            String flash = "該当のユーザーは見つかりません";
             mav.addObject("flash", flash);
             return mav;
         }
+    }
+
+    /**
+     * 編集画面
+     *
+     * @param mav
+     * @param userId
+     * @return
+     */
+    @GetMapping(value = "user/edit/{userId}")
+    public ModelAndView edit(ModelAndView mav,
+                             @PathVariable Long userId) {
+        Optional<User> userOpt = userService.getById(userId);
+        if (userOpt.isPresent()) {
+            mav.setViewName("/users/editForm");
+            mav.addObject("user",userOpt.get());
+            return mav;
+        } else {
+            mav.setViewName("/articles/index");
+            String flash = "該当のユーザーは見つかりません";
+            mav.addObject("flash", flash);
+            return mav;
+        }
+    }
+
+    /**
+     * 更新
+     *
+     * @param userForm
+     * @return
+     */
+    @PostMapping(value = "user/update")
+    public String update(@ModelAttribute("userForm")UserForm userForm) {
+        userService.update(userForm);
+        return "redirect:/";
     }
 }
