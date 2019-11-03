@@ -99,4 +99,60 @@ public class UserController {
         userService.update(userForm);
         return "redirect:/";
     }
+
+    /**
+     * ログイン画面
+     *
+     * @param mav
+     * @return
+     */
+    @GetMapping(value = "login")
+    public ModelAndView loginForm(ModelAndView mav) {
+        mav.setViewName("/users/loginForm");
+        return mav;
+    }
+
+    /**
+     * ログイン
+     *
+     * @param
+     * @return
+     */
+    @PostMapping("login")
+    public String login() {
+        return "forward:/authenticate";
+    }
+
+    /**
+     * ログイン成功時の画面遷移
+     *
+     * @param
+     * @return
+     */
+    @PostMapping("success")
+    public String loginSuccess() {
+        return "redirect:/";
+    }
+
+    /**
+     * ログイン失敗時の画面遷移
+     *
+     * @return
+     */
+    @PostMapping("failure")
+    public String loginFailure() {
+        return "redirect:/login";
+    }
+
+    /**
+     * ログアウト画面
+     *
+     * @param mav
+     * @return
+     */
+    @GetMapping("logout")
+    public ModelAndView logoutForm(ModelAndView mav) {
+        mav.setViewName("users/logoutForm");
+        return mav;
+    }
 }
