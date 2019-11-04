@@ -9,11 +9,14 @@
     <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
 </head>
 <body>
-<div th:insert="~{header :: copy}"></div>
+<header th:fragment="copy">
+    <div class="flash" th:if="${flash != null}" th:text="${flash}"></div>
+    <a class="logo">NANPA PICKS</a>
+</header>
 
 <div class="contents">
     <div class="login">
-        <h1>ログインうんこ</h1>
+        <h1>ログイン</h1>
         <div class="form">
             <form method="post" th:action="@{'/login'}" th:object="${loginForm}">
                 <div class="form-group login-form">
