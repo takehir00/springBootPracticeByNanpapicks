@@ -22,9 +22,26 @@ public interface UserService {
     Optional<User> getById(Long userId);
 
     /**
+     * メールアドレスで取得
+     *
+     * @param mail
+     * @return
+     */
+    Optional<User> getByMail(String mail);
+
+    /**
      * 更新
      *
      * @param userForm
      */
     void update(UserForm userForm);
+
+    /**
+     * IDとメールアドレスで取得
+     *
+     * @param userId
+     * @param mail
+     * @return
+     */
+    Optional<User> getByIdAndMail(Long userId, String mail);
 }

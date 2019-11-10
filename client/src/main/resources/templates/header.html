@@ -13,8 +13,8 @@
         <div class="flash" th:if="${flash != null}" th:text="${flash}"></div>
         <a class="logo">NANPA PICKS</a>
         <div class="header-menu">
-            <a class="btn btn-primary" th:text="${user.name}"></a>
-            <a class="btn btn-primary" th:href="@{/logout}">ログアウト</a>
+            <a class="btn btn-primary" th:if="${user != null}" th:href="@{/user/{userId}(userId=${user.id})}" th:text="${user.name}"></a>
+            <a class="btn btn-primary" th:if="${user != null}" th:href="@{/logout}">ログアウト</a>
         </div>
     </header>
 </body>

@@ -2,6 +2,7 @@ package client.services.impl;
 
 import client.forms.UserForm;
 import client.services.UserService;
+import db.daos.impl.UserDaoImpl;
 import db.models.User;
 import db.repositries.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.Optional;
 
 @Service
@@ -18,6 +21,9 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
+
+    @PersistenceContext
+    EntityManager entityManager;
 
     @Override
     public void create(UserForm userForm) {
@@ -34,6 +40,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> getById(Long userId) {
         return userRepository.findById(userId);
+    }
+
+    @Override
+    public Optional<User> getByMail(String mail) {
+        UserDaoImpl userDao = new UserDaoImpl(entityManager);
+        return userDao.findByMail(mail);
+    }
+
+    @Override
+    public Optional<User> getByIdAndMail(Long userId, String mail) {
+        UserDaoImpl userDao = new UserDaoImpl(entityManager);
+        return userDao.findByIdAndMail(userId, mail);
     }
 
     @Override
