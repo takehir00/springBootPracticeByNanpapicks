@@ -7,6 +7,7 @@ import admin.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +27,8 @@ public class UserServiceImpl implements UserService {
         user.mail = userForm.mail;
         user.introduction = userForm.introduction;
         user.imageUrl = userForm.imageUrl;
-        user.password = userForm.password;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.password = encoder.encode(userForm.password);
         userRepository.save(user);
     }
 
