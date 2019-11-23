@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nanpa_Picks</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/articles.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<body>
+<div th:insert="~{header :: copy}"></div>
+
+<div class="contents">
+    <div class="login">
+        <h1>ログアウトしますか？</h1>
+        <div class="form">
+            <form method="post" th:action="@{'/logout'}">
+                <input class="btn btn-primary login-btn" type="submit" value="ログアウト" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:insert="~{footer :: copy}"></div>
+</body>
+</html>

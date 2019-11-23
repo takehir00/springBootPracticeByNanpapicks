@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nanpa_Picks</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:insert="~{header :: copy}"></div>
+<div th:insert="~{nav :: copy}"></div>
+<div class="admin-content">
+    <p>このユーザーを削除しますか？</p>
+    <form th:method="delete" action="/admin/user" th:object="${userForm}">
+        <input type="hidden" name="id" th:value="${user.id}"/>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>名前</th>
+                <th>メールアドレス</th>
+                <th>introduction</th>
+                <th>画像URL</th>
+                <th>パスワード</th>
+            </tr>
+            <tr>
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.name != null}? ${user.name} : 'URLがありません'"></td>
+                <td th:text="${user.mail != null}? ${user.mail} : 'メールアドレスがありません'"></td>
+                <td th:text="${user.introduction != null}? ${user.introduction} : '自己紹介がありません'"></td>
+                <td th:text="${user.imageUrl != null}? ${user.imageUrl} : '画像URLがありません'"></td>
+                <td th:text="${user.password != null}? ${user.password} : 'パスワードがありません'"></td>
+            </tr>
+        </table>
+        <input type="submit" value="削除する"/>
+    </form>
+</div>
+</body>
+</html>
