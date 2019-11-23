@@ -69,17 +69,8 @@ public class UserController {
     @GetMapping(value = "user/{userId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Long userId) {
-        String mail;
-        Object principal = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-        if (principal instanceof UserDetails) {
-            mail = ((UserDetails)principal).getUsername();
-        } else {
-            mail = principal.toString();
-        }
-
+        String mail = getMailByPrincipal();
+        
         Optional<User> userOpt = userService.getByMail(mail);
         if (!userOpt.isPresent()) {
             mav.setViewName("articles/index");
@@ -147,16 +138,7 @@ public class UserController {
     @PostMapping(value = "user/update")
     public String update(RedirectAttributes redirectAttributes,
                          @ModelAttribute("userForm")UserForm userForm) throws NotFoundException {
-        String mail;
-        Object principal = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-        if (principal instanceof UserDetails) {
-            mail = ((UserDetails)principal).getUsername();
-        } else {
-            mail = principal.toString();
-        }
+        String mail = getMailByPrincipal();
 
         Optional<User> userOpt = userService.getByMail(mail);
         if (!userOpt.isPresent()) {
