@@ -1,13 +1,24 @@
 package client.controllers;
 
 import client.forms.UserForm;
+import client.responses.users.UserUpdateFormResponse;
+import client.services.ArticleService;
 import client.services.UserService;
+import db.daos.impl.UserDaoImpl;
 import db.models.User;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.Optional;
 
 /**
@@ -17,6 +28,12 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    ArticleService articleService;
+
+    @PersistenceContext
+    EntityManager entityManager;
 
     /**
      * 登録画面
@@ -52,17 +69,28 @@ public class UserController {
     @GetMapping(value = "user/{userId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Long userId) {
-        Optional<User> userOpt = userService.getById(userId);
-        if (userOpt.isPresent()) {
-            mav.setViewName("/users/show");
-            mav.addObject("user",userOpt.get());
-            return mav;
-        } else {
-            mav.setViewName("/articles/index");
-            String flash = "該当のユーザーは見つかりません";
+        String mail = getMailByPrincipal();
+        
+        Optional<User> userOpt = userService.getByMail(mail);
+        if (!userOpt.isPresent()) {
+            mav.setViewName("articles/index");
+            String flash = "あなたのアカウントは削除されています";
             mav.addObject("flash", flash);
+            mav.addObject("articles", articleService.getAll());
             return mav;
         }
+
+        if (!userOpt.get().id.equals(userId)) {
+            mav.addObject("user", userOpt.get());
+            mav.setViewName("articles/index");
+            String flash = "指定したユーザーにアクセスする権限はありません";
+            mav.addObject("flash", flash);
+            mav.addObject("articles", articleService.getAll());
+            return mav;
+        }
+        mav.setViewName("users/show");
+        mav.addObject("user",userOpt.get());
+        return mav;
     }
 
     /**
@@ -75,17 +103,30 @@ public class UserController {
     @GetMapping(value = "user/edit/{userId}")
     public ModelAndView edit(ModelAndView mav,
                              @PathVariable Long userId) {
-        Optional<User> userOpt = userService.getById(userId);
-        if (userOpt.isPresent()) {
-            mav.setViewName("/users/editForm");
-            mav.addObject("user",userOpt.get());
-            return mav;
-        } else {
-            mav.setViewName("/articles/index");
-            String flash = "該当のユーザーは見つかりません";
+        String mail = getMailByPrincipal();
+
+        Optional<User> userOpt = userService.getByMail(mail);
+        if (!userOpt.isPresent()) {
+            mav.setViewName("articles/index");
+            String flash = "あなたのアカウントは削除されています";
             mav.addObject("flash", flash);
+            mav.addObject("articles", articleService.getAll());
             return mav;
         }
+
+        if (!userOpt.get().id.equals(userId)) {
+            mav.addObject("user", userOpt.get());
+            mav.setViewName("articles/index");
+            String flash = "指定したユーザーにアクセスする権限はありません";
+            mav.addObject("flash", flash);
+            mav.addObject("articles", articleService.getAll());
+            return mav;
+        }
+
+        mav.addObject("user",
+                userService.createEditForm(userOpt.get()));
+        mav.setViewName("users/editForm");
+        return mav;
     }
 
     /**
@@ -95,8 +136,44 @@ public class UserController {
      * @return
      */
     @PostMapping(value = "user/update")
-    public String update(@ModelAttribute("userForm")UserForm userForm) {
+    public String update(RedirectAttributes redirectAttributes,
+                         @ModelAttribute("userForm")UserForm userForm) throws NotFoundException {
+        String mail = getMailByPrincipal();
+
+        Optional<User> userOpt = userService.getByMail(mail);
+        if (!userOpt.isPresent()) {
+            String flash = "あなたのアカウントは削除されています";
+            redirectAttributes.addAttribute("flash", flash);
+            redirectAttributes.addAttribute("articles", articleService.getAll());
+            return "redirect:/";
+        }
+
+        if (!userOpt.get().id.equals(userForm.id)) {
+            redirectAttributes.addAttribute("user", userOpt.get());
+            String flash = "指定したユーザーにアクセスする権限はありません";
+            redirectAttributes.addAttribute("flash", flash);
+            redirectAttributes.addAttribute("articles", articleService.getAll());
+            return "redirect:/";
+        }
         userService.update(userForm);
         return "redirect:/";
     }
+
+    /**
+     * プリンシパルからアクセス者のメールアドレスを取得する
+     *
+     * @return
+     */
+    private String getMailByPrincipal() {
+        Object principal = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+        if (principal instanceof UserDetails) {
+            return ((UserDetails)principal).getUsername();
+        } else {
+            return principal.toString();
+        }
+    }
+
 }

@@ -9,13 +9,19 @@
     <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
 </head>
 <body>
-    <header th:fragment="copy">
-        <div class="flash" th:if="${flash != null}" th:text="${flash}"></div>
-        <a class="logo">NANPA PICKS</a>
-        <div class="header-menu">
-            <a class="btn btn-primary" th:if="${user != null}" th:href="@{/user/{userId}(userId=${user.id})}" th:text="${user.name}"></a>
-            <a class="btn btn-primary" th:if="${user != null}" th:href="@{/logout}">ログアウト</a>
+<div th:insert="~{header :: copy}"></div>
+
+<div class="contents">
+    <div class="login">
+        <h1>ログアウトしますか？</h1>
+        <div class="form">
+            <form method="post" th:action="@{'/logout'}">
+                <input class="btn btn-primary login-btn" type="submit" value="ログアウト" />
+            </form>
         </div>
-    </header>
+    </div>
+</div>
+
+<div th:insert="~{footer :: copy}"></div>
 </body>
 </html>
