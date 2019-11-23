@@ -29,14 +29,6 @@
                     <label for="introduction">自己紹介</label>
                     <input class="form-control" type="text" name="introduction" id="introduction" th:value="${user.introduction}" />
                 </div>
-                <div class="form-group login-form">
-                    <label for="password">パスワード</label>
-                    <input class="form-control" type="password" name="password" id="password" th:value="${user.password}" />
-                </div>
-                <div class="form-group login-form">
-                    <label for="passwordConfirmation">パスワード確認</label>
-                    <input class="form-control" type="password" name="passwordConfirmation" id="passwordConfirmation" th:value="${user.password}" />
-                </div>
                 <input class="btn btn-primary login-btn" type="submit" value="更新" />
             </form>
         </div>
