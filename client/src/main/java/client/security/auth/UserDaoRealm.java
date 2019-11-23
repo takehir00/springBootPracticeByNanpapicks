@@ -1,8 +1,8 @@
-package client.security;
+package client.security.auth;
 
+import client.security.auth.LoginUser;
 import db.daos.impl.UserDaoImpl;
 import db.models.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,7 +16,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @EntityScan(basePackageClasses = User.class)
 @EnableJpaRepositories(basePackageClasses = UserDaoImpl.class)

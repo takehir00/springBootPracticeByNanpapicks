@@ -1,4 +1,4 @@
-package client.security;
+package client.security.auth;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
