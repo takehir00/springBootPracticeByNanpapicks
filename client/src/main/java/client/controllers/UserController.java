@@ -1,14 +1,17 @@
 package client.controllers;
 
 import client.forms.UserForm;
+import client.responses.users.UserUpdateFormResponse;
 import client.services.ArticleService;
 import client.services.UserService;
 import db.daos.impl.UserDaoImpl;
 import db.models.User;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -109,16 +112,7 @@ public class UserController {
     @GetMapping(value = "user/edit/{userId}")
     public ModelAndView edit(ModelAndView mav,
                              @PathVariable Long userId) {
-        String mail;
-        Object principal = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-        if (principal instanceof UserDetails) {
-            mail = ((UserDetails)principal).getUsername();
-        } else {
-            mail = principal.toString();
-        }
+        String mail = getMailByPrincipal();
 
         Optional<User> userOpt = userService.getByMail(mail);
         if (!userOpt.isPresent()) {
@@ -137,8 +131,10 @@ public class UserController {
             mav.addObject("articles", articleService.getAll());
             return mav;
         }
+
+        mav.addObject("user",
+                userService.createEditForm(userOpt.get()));
         mav.setViewName("users/editForm");
-        mav.addObject("user",userOpt.get());
         return mav;
     }
 
@@ -150,7 +146,7 @@ public class UserController {
      */
     @PostMapping(value = "user/update")
     public String update(RedirectAttributes redirectAttributes,
-                         @ModelAttribute("userForm")UserForm userForm) {
+                         @ModelAttribute("userForm")UserForm userForm) throws NotFoundException {
         String mail;
         Object principal = SecurityContextHolder
                 .getContext()
@@ -180,4 +176,22 @@ public class UserController {
         userService.update(userForm);
         return "redirect:/";
     }
+
+    /**
+     * プリンシパルからアクセス者のメールアドレスを取得する
+     *
+     * @return
+     */
+    private String getMailByPrincipal() {
+        Object principal = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+        if (principal instanceof UserDetails) {
+            return ((UserDetails)principal).getUsername();
+        } else {
+            return principal.toString();
+        }
+    }
+
 }
