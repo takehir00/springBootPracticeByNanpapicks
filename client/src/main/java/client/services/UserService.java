@@ -1,7 +1,9 @@
 package client.services;
 
 import client.forms.UserForm;
+import client.responses.users.UserUpdateFormResponse;
 import db.models.User;
+import javassist.NotFoundException;
 
 import java.util.Optional;
 
@@ -34,7 +36,7 @@ public interface UserService {
      *
      * @param userForm
      */
-    void update(UserForm userForm);
+    void update(UserForm userForm) throws NotFoundException;
 
     /**
      * IDとメールアドレスで取得
@@ -44,4 +46,11 @@ public interface UserService {
      * @return
      */
     Optional<User> getByIdAndMail(Long userId, String mail);
+
+    /**
+     * 更新フォームを生成する
+     *
+     * @param user
+     */
+    UserUpdateFormResponse createEditForm(User user);
 }
