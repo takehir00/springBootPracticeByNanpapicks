@@ -46,6 +46,5 @@ dependencies {
     compile group: 'org.springframework.security', name: 'spring-security-crypto', version: '5.2.0.RELEASE'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.9.RELEASE'
-
+    compile "org.springframework.boot:spring-boot-starter-security"
 }
