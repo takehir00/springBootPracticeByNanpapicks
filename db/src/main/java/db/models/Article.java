@@ -1,6 +1,7 @@
 package db.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Article {
@@ -18,4 +19,7 @@ public class Article {
     @Column
     public String imageUrl;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "article")
+    @Column(nullable = true)
+    public List<Comment> commentList;
 }

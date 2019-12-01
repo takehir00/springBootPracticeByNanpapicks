@@ -1,6 +1,7 @@
 package db.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -23,4 +24,8 @@ public class User {
 
     @Column
     public String password;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @Column(nullable = true)
+    public List<Comment> commentList;
 }
