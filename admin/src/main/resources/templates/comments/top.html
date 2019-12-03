@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nanpa_Picks</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<body>
+<div class="flash" th:text=""></div>
+<div th:insert="~{header :: copy}"></div>
+<div th:insert="~{nav :: copy}"></div>
+<div class="admin-content">
+    <table>
+        <tr>
+            <th> </th>
+            <th> </th>
+            <th>id</th>
+            <th>url</th>
+            <th>title</th>
+            <th>src</th>
+        </tr>
+        <tr th:each="">
+            <td>
+                <a href="" th:href="@{}">編集</a>
+            </td>
+            <td>
+                <a href="l" th:href="@{}">削除</a>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
