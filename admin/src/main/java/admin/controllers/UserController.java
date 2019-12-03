@@ -1,7 +1,7 @@
 package admin.controllers;
 
 import admin.forms.UserForm;
-import db.models.User;
+import db.entities.User;
 import admin.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
