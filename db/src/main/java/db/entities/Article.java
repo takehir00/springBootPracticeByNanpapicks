@@ -1,31 +1,25 @@
-package db.models;
+package db.entities;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class User {
+public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     public Long id;
 
     @Column
-    public String name;
+    public String url;
 
     @Column
-    public String mail;
-
-    @Column
-    public String introduction;
+    public String title;
 
     @Column
     public String imageUrl;
 
-    @Column
-    public String password;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "article")
     @Column(nullable = true)
     public List<Comment> commentList;
 }

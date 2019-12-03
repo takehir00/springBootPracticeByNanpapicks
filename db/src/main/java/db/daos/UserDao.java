@@ -1,6 +1,6 @@
 package db.daos;
 
-import db.models.User;
+import db.entities.User;
 
 import java.util.Optional;
 

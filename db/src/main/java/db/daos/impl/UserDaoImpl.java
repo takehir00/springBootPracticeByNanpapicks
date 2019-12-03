@@ -1,8 +1,7 @@
 package db.daos.impl;
 
 import db.daos.UserDao;
-import db.models.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import db.entities.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

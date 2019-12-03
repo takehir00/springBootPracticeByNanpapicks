@@ -4,7 +4,7 @@ import client.forms.UserForm;
 import client.responses.users.UserUpdateFormResponse;
 import client.services.UserService;
 import db.daos.impl.UserDaoImpl;
-import db.models.User;
+import db.entities.User;
 import db.repositries.UserRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

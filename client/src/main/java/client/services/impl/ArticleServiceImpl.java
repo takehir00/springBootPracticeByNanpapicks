@@ -1,6 +1,6 @@
 package client.services.impl;
 
-import db.models.Article;
+import db.entities.Article;
 import client.services.ArticleService;
 import db.repositries.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
