@@ -2,7 +2,7 @@ package admin.services.impl;
 
 
 import admin.forms.ArticleForm;
-import db.models.Article;
+import db.entities.Article;
 import db.repositries.ArticleRepository;
 import admin.services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;

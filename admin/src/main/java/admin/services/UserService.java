@@ -1,7 +1,7 @@
 package admin.services;
 
 import admin.forms.UserForm;
-import db.models.User;
+import db.entities.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +19,7 @@ public interface UserService {
      *
      * @return ユーザー一覧
      */
-    List<db.models.User> getAll();
+    List<db.entities.User> getAll();
 
     /**
      * IDでユーザー取得

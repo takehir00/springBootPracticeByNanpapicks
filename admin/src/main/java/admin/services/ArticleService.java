@@ -2,7 +2,7 @@ package admin.services;
 
 
 import admin.forms.ArticleForm;
-import db.models.Article;
+import db.entities.Article;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +26,7 @@ public interface ArticleService {
      * @param id
      * @return
      */
-    Optional<db.models.Article> getById(Long id);
+    Optional<db.entities.Article> getById(Long id);
 
     /**
      * 記事更新
