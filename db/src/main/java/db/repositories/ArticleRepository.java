@@ -1,4 +1,4 @@
-package db.repositries;
+package db.repositories;
 
 
 import db.entities.Article;
