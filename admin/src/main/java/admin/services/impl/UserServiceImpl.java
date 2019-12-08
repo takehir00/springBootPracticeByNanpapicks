@@ -2,7 +2,7 @@ package admin.services.impl;
 
 import admin.forms.UserForm;
 import db.entities.User;
-import db.repositries.UserRepository;
+import db.repositories.UserRepository;
 import admin.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

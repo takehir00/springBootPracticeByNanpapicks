@@ -3,7 +3,7 @@ package admin.services.impl;
 
 import admin.forms.ArticleForm;
 import db.entities.Article;
-import db.repositries.ArticleRepository;
+import db.repositories.ArticleRepository;
 import admin.services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

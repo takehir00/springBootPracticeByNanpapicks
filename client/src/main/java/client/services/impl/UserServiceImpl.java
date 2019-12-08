@@ -5,7 +5,7 @@ import client.responses.users.UserUpdateFormResponse;
 import client.services.UserService;
 import db.daos.impl.UserDaoImpl;
 import db.entities.User;
-import db.repositries.UserRepository;
+import db.repositories.UserRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
