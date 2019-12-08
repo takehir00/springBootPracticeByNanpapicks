@@ -1,7 +1,7 @@
 package admin.controllers;
 
 
-import admin.forms.ArticleForm;
+import admin.forms.article.ArticleForm;
 import db.entities.Article;
 import admin.services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package admin.services;
 
-import admin.forms.UserForm;
+import admin.forms.user.UserForm;
 import db.entities.User;
 
 import java.util.List;

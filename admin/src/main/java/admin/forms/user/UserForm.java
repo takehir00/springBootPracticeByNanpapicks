@@ -1,4 +1,4 @@
-package admin.forms;
+package admin.forms.user;
 
 import lombok.Data;
 

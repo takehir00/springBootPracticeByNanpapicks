@@ -1,7 +1,7 @@
 package admin.services.impl;
 
 
-import admin.forms.ArticleForm;
+import admin.forms.article.ArticleForm;
 import db.entities.Article;
 import db.repositories.ArticleRepository;
 import admin.services.ArticleService;

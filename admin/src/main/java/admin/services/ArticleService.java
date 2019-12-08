@@ -1,7 +1,7 @@
 package admin.services;
 
 
-import admin.forms.ArticleForm;
+import admin.forms.article.ArticleForm;
 import db.entities.Article;
 
 import java.util.List;

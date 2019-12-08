@@ -1,6 +1,6 @@
 package admin.services.impl;
 
-import admin.forms.UserForm;
+import admin.forms.user.UserForm;
 import db.entities.User;
 import db.repositories.UserRepository;
 import admin.services.UserService;
