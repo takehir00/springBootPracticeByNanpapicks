@@ -17,4 +17,8 @@ public class CommentRepository {
                 "select comment from Comment comment", Comment.class)
                 .getResultList();
     }
+
+    public void create(Comment entity) {
+        entityManager.persist(entity);
+    }
 }

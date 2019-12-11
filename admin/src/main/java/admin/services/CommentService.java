@@ -1,6 +1,7 @@
 package admin.services;
 
 import admin.forms.comment.CommentRegisterForm;
+import admin.responses.CommentRegisterFormResponse;
 import admin.responses.CommentTopResponse;
 
 public interface CommentService {
@@ -16,5 +17,12 @@ public interface CommentService {
      *
      * @return
      */
-    CommentRegisterForm registerForm();
+    CommentRegisterFormResponse registerForm();
+
+    /**
+     * 登録
+     *
+     * @param commentRegisterForm
+     */
+    void create(CommentRegisterForm commentRegisterForm);
 }
