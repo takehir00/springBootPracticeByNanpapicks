@@ -13,7 +13,7 @@
 <div class="admin-content">
     <h1 class="admin-content-title">記事登録フォーム</h1>
     <table>
-        <form method="post" action="/admin/comment" th:object="${commentRegisterForm}">
+        <form method="post" action="/admin/comment/register" th:object="${commentRegisterForm}">
             <tr>
                 <td><label for="content">コメント本文</label></td>
                 <td><input type="text" name="content" id="content" /></td>
@@ -22,7 +22,7 @@
                 <td><label for="userId">ユーザーID</label></td>
                 <td>
                     <select name="userId" id="userId">
-                        <option th:each="userId : ${commentRegisterForm.userIdList}" th:text="${userId}" value="${userId}"></option>
+                        <option th:each="userId : ${commentRegisterForm.userIdList}" th:text="${userId}" th:value="${userId}"></option>
                     </select>
                 </td>
             </tr>
@@ -30,7 +30,7 @@
                 <td><label for="articleId">記事ID</label></td>
                 <td>
                     <select name="articleId" id="articleId">
-                        <option th:each="articleId : ${commentRegisterForm.articleIdList}" th:text="${articleId}" value="${articleId}"></option>
+                        <option th:each="articleId : ${commentRegisterForm.articleIdList}" th:text="${articleId}" th;value="${articleId}"></option>
                     </select>
                 </td>
             </tr>
