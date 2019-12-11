@@ -1,8 +1,8 @@
 package admin.services.impl;
 
-import admin.forms.UserForm;
-import db.models.User;
-import db.repositries.UserRepository;
+import admin.forms.user.UserForm;
+import db.entities.User;
+import db.repositories.UserRepository;
 import admin.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -33,13 +33,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<db.models.User> getAll() {
+    public List<db.entities.User> getAll() {
         List<User> users = userRepository.findAll();
         return users;
     }
 
     @Override
-    public Optional<db.models.User> getById(Long id) {
+    public Optional<db.entities.User> getById(Long id) {
         return userRepository.findById(id);
     }
 

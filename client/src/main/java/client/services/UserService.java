@@ -2,7 +2,7 @@ package client.services;
 
 import client.forms.UserForm;
 import client.responses.users.UserUpdateFormResponse;
-import db.models.User;
+import db.entities.User;
 import javassist.NotFoundException;
 
 import java.util.Optional;

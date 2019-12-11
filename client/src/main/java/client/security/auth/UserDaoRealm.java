@@ -1,8 +1,7 @@
 package client.security.auth;
 
-import client.security.auth.LoginUser;
 import db.daos.impl.UserDaoImpl;
-import db.models.User;
+import db.entities.User;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.core.GrantedAuthority;

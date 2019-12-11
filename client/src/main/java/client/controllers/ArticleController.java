@@ -1,9 +1,9 @@
 package client.controllers;
 
 import db.daos.impl.UserDaoImpl;
-import db.models.Article;
+import db.entities.Article;
 import client.services.ArticleService;
-import db.models.User;
+import db.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,8 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 /**

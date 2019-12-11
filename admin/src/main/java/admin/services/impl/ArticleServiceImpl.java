@@ -1,9 +1,9 @@
 package admin.services.impl;
 
 
-import admin.forms.ArticleForm;
-import db.models.Article;
-import db.repositries.ArticleRepository;
+import admin.forms.article.ArticleForm;
+import db.entities.Article;
+import db.repositories.ArticleRepository;
 import admin.services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

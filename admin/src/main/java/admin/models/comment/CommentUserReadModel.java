@@ -1,9 +1,9 @@
-package admin.forms;
+package admin.models.comment;
 
-import lombok.Data;
+import lombok.Builder;
 
-@Data
-public class UserForm {
+@Builder
+public class CommentUserReadModel {
     public Long id;
 
     public String name;
@@ -13,6 +13,4 @@ public class UserForm {
     public String introduction;
 
     public String imageUrl;
-
-    public String password;
 }

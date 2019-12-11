@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nanpa_Picks</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/admin.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<body>
+<div class="flash" th:if="${articleResponse.flash != null}" th:text="${articleResponse.flash}"></div>
+<div th:insert="~{header :: copy}"></div>
+<div th:insert="~{nav :: copy}"></div>
+<div class="admin-content">
+    <table>
+        <tr>
+            <th>id</th>
+            <th>コメント本文</th>
+            <th>ユーザーID</th>
+            <th>記事ID</th>
+            <th> </th>
+            <th> </th>
+        </tr>
+        <tr th:each="comment : ${articleResponse.commentList}">
+            <td th:text="${comment.id}"></td>
+            <td th:text="${comment.content != null}? ${comment.content} : '本文がありません'"></td>
+            <td th:text="${comment.userId != null}? ${comment.userId} : '紐づくユーザーが見つかりません'"></td>
+            <td th:text="${comment.articleId != null}? ${comment.articleId} : '紐づく記事が見つかりません'"></td>
+            <td>
+                <a href="articles/editForm.html" th:href="@{/admin/article/edit/{commentId}(commentId=${comment.id})}">編集</a>
+            </td>
+            <td>
+                <a href="articles/deleteForm.html" th:href="@{/admin/article/destroy/{commentId}(commentId=${comment.id})}">削除</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

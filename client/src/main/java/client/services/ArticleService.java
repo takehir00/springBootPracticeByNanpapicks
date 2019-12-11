@@ -1,6 +1,6 @@
 package client.services;
 
-import db.models.Article;
+import db.entities.Article;
 
 import java.util.List;
 import java.util.Optional;
