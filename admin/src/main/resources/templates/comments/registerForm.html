@@ -22,7 +22,7 @@
                 <td><label for="userId">ユーザーID</label></td>
                 <td>
                     <select name="userId" id="userId">
-                        <option th:each="userId : ${commentRegisterForm.userIdList}" th:text="${userId}" th:value="${userId}"></option>
+                        <option th:each="userId : ${commentRegisterFormResponse.userIdList}" th:text="${userId}" th:value="${userId}"></option>
                     </select>
                 </td>
             </tr>
@@ -30,7 +30,7 @@
                 <td><label for="articleId">記事ID</label></td>
                 <td>
                     <select name="articleId" id="articleId">
-                        <option th:each="articleId : ${commentRegisterForm.articleIdList}" th:text="${articleId}" th;value="${articleId}"></option>
+                        <option th:each="articleId : ${commentRegisterFormResponse.articleIdList}" th:text="${articleId}" th;value="${articleId}"></option>
                     </select>
                 </td>
             </tr>
