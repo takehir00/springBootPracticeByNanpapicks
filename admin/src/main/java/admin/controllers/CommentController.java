@@ -39,7 +39,7 @@ public class CommentController {
     public ModelAndView registerForm(ModelAndView mav) {
         CommentRegisterFormResponse form =
                 commentService.registerForm();
-        mav.addObject("commentRegisterForm", form);
+        mav.addObject("commentRegisterFormResponse", form);
         mav.setViewName("comments/registerForm");
         return mav;
     }
@@ -56,5 +56,12 @@ public class CommentController {
             @ModelAttribute("commentRegisterForm") CommentRegisterForm commentRegisterForm) {
         commentService.create(commentRegisterForm);
         return "redirect:/admin/comment";
+    }
+
+    public ModelAndView updateForm(ModelAndView mav) {
+        // レスポンスクラスに値の入ったフォームクラスを持たせてviewに渡す
+
+        return mav;
+
     }
 }
