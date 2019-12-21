@@ -1,8 +1,10 @@
 package admin.services.impl;
 
+import admin.forms.comment.CommentDeleteForm;
 import admin.forms.comment.CommentRegisterForm;
 import admin.forms.comment.CommentUpdateForm;
 import admin.models.comment.CommentReadModel;
+import admin.responses.CommentDeleteFormResponse;
 import admin.responses.CommentRegisterFormResponse;
 import admin.responses.CommentTopResponse;
 import admin.responses.CommentUpdateFormResponse;
@@ -95,5 +97,20 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void update(CommentUpdateForm commentUpdateForm) {
         commentRepository.update(commentUpdateForm.asEntity());
+    }
+
+    @Override
+    public CommentDeleteFormResponse deleteForm(Long commentId) {
+        Comment comment = commentRepository.findById(commentId);
+
+        return CommentDeleteFormResponse.builder()
+                .commentDeleteForm(
+                        CommentDeleteForm.builder()
+                                .id(comment.id)
+                                .content(comment.content)
+                                .userId(comment.user.id)
+                                .articleId(comment.article.id)
+                                .build())
+                .build();
     }
 }

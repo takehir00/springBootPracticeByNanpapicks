@@ -2,6 +2,7 @@ package admin.controllers;
 
 import admin.forms.comment.CommentRegisterForm;
 import admin.forms.comment.CommentUpdateForm;
+import admin.responses.CommentDeleteFormResponse;
 import admin.responses.CommentRegisterFormResponse;
 import admin.responses.CommentUpdateFormResponse;
 import admin.services.CommentService;
@@ -90,5 +91,15 @@ public class CommentController {
             @ModelAttribute("commentUpdateForm")CommentUpdateForm commentUpdateForm) {
         commentService.update(commentUpdateForm);
         return "redirect:/admin/comment";
+    }
+
+    @GetMapping("/admin/comment/delete/{commentId}")
+    public ModelAndView deleteForm(ModelAndView mav,
+                             @PathVariable Long commentId) {
+        CommentDeleteFormResponse response =
+                commentService.deleteForm(commentId);
+        mav.addObject("commentDeleteFormResponse", response);
+        mav.setViewName("comments/deleteForm");
+        return mav;
     }
 }

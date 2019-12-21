@@ -2,6 +2,7 @@ package admin.services;
 
 import admin.forms.comment.CommentRegisterForm;
 import admin.forms.comment.CommentUpdateForm;
+import admin.responses.CommentDeleteFormResponse;
 import admin.responses.CommentRegisterFormResponse;
 import admin.responses.CommentTopResponse;
 import admin.responses.CommentUpdateFormResponse;
@@ -42,4 +43,12 @@ public interface CommentService {
      * @param commentUpdateForm
      */
     void update(CommentUpdateForm commentUpdateForm);
+
+    /**
+     * 削除フォーム
+     *
+     * @param commentId
+     * @return
+     */
+    CommentDeleteFormResponse deleteForm(Long commentId);
 }
