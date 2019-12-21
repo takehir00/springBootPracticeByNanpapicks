@@ -28,4 +28,8 @@ public class CommentRepository {
     public void create(Comment entity) {
         entityManager.persist(entity);
     }
+
+    public void update(Comment entity) {
+        entityManager.merge(entity);
+    }
 }

@@ -13,7 +13,7 @@
 <div class="admin-content">
     <h1 class="admin-content-title">記事更新フォーム</h1>
     <table>
-        <form method="post" action="/admin/comment/update" th:object="${commentUpdateForm}">
+        <form method="post" action="/admin/comment/edit" th:object="${commentUpdateForm}">
             <input type="hidden" name="id" id="id" th:value="${commentUpdateFormResponse.commentUpdateForm.id}" />
             <tr>
                 <td><label for="content">コメント本文</label></td>

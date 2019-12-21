@@ -91,4 +91,9 @@ public class CommentServiceImpl implements CommentService {
                                 .build())
                 .build();
     }
+
+    @Override
+    public void update(CommentUpdateForm commentUpdateForm) {
+        commentRepository.update(commentUpdateForm.asEntity());
+    }
 }

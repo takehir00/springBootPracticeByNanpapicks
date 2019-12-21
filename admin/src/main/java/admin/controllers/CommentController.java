@@ -1,6 +1,7 @@
 package admin.controllers;
 
 import admin.forms.comment.CommentRegisterForm;
+import admin.forms.comment.CommentUpdateForm;
 import admin.responses.CommentRegisterFormResponse;
 import admin.responses.CommentUpdateFormResponse;
 import admin.services.CommentService;
@@ -75,5 +76,19 @@ public class CommentController {
         mav.addObject("commentUpdateFormResponse", response);
         mav.setViewName("comments/updateForm");
         return mav;
+    }
+
+    /**
+     * 更新
+     *
+     * @param commentUpdateForm
+     * @return
+     */
+    @Transactional
+    @PostMapping("/admin/comment/edit")
+    public String update(
+            @ModelAttribute("commentUpdateForm")CommentUpdateForm commentUpdateForm) {
+        commentService.update(commentUpdateForm);
+        return "redirect:/admin/comment";
     }
 }
