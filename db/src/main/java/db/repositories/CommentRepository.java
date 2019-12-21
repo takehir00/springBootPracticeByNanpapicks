@@ -12,6 +12,13 @@ public class CommentRepository {
     @PersistenceContext
     EntityManager entityManager;
 
+    public Comment findById(Long commentId) {
+        return entityManager.createQuery(
+                "select comment from Comment comment where comment.id = :commentId" ,Comment.class)
+                .setParameter("commentId", commentId)
+                .getSingleResult();
+    }
+
     public List<Comment> findAll() {
         return entityManager.createQuery(
                 "select comment from Comment comment", Comment.class)
