@@ -21,7 +21,7 @@ import java.util.Optional;
  * 記事コントローラ
  */
 @Controller
-public class ArticleController {
+public class ArticleController extends HomeController {
     @Autowired
     ArticleService articleService;
 
@@ -36,21 +36,8 @@ public class ArticleController {
      */
     @GetMapping(value = "/")
     public ModelAndView index(ModelAndView mav) {
-        String mail;
-        //対話中のユーザーのプリンシパルを取得する
-        Object principal = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            //ユーザー名からユーザー情報を取得する
-            mail = ((UserDetails)principal).getUsername();
-        } else {
-            mail = principal.toString();
-        }
         UserDaoImpl userDao = new UserDaoImpl(entityManager);
-        User user = userDao.findByMail(mail)
+        User user = userDao.findByMail(getMail())
                 .orElseThrow(() -> new UsernameNotFoundException(""));
         mav.addObject("user", user);
 
@@ -68,20 +55,11 @@ public class ArticleController {
     @GetMapping(value = "article/{articleId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Long articleId) {
-        String mail;
-        Object principal = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-        if (principal instanceof UserDetails) {
-            //ユーザー名からユーザー情報を取得する
-            mail = ((UserDetails)principal).getUsername();
-        } else {
-            mail = principal.toString();
-        }
         UserDaoImpl userDao = new UserDaoImpl(entityManager);
-        User user = userDao.findByMail(mail)
+
+        User user = userDao.findByMail(getMail())
                 .orElseThrow(() -> new UsernameNotFoundException(""));
+
         mav.addObject("user", user);
 
         Optional<Article> article = articleService.getById(articleId);
