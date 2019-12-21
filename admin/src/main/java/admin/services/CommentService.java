@@ -1,8 +1,12 @@
 package admin.services;
 
+import admin.forms.comment.CommentDeleteForm;
 import admin.forms.comment.CommentRegisterForm;
+import admin.forms.comment.CommentUpdateForm;
+import admin.responses.CommentDeleteFormResponse;
 import admin.responses.CommentRegisterFormResponse;
 import admin.responses.CommentTopResponse;
+import admin.responses.CommentUpdateFormResponse;
 
 public interface CommentService {
     /**
@@ -25,4 +29,34 @@ public interface CommentService {
      * @param commentRegisterForm
      */
     void create(CommentRegisterForm commentRegisterForm);
+
+    /**
+     * 更新フォーム
+     *
+     * @param commentId
+     * @return
+     */
+    CommentUpdateFormResponse updateForm(Long commentId);
+
+    /**
+     * 更新
+     *
+     * @param commentUpdateForm
+     */
+    void update(CommentUpdateForm commentUpdateForm);
+
+    /**
+     * 削除フォーム
+     *
+     * @param commentId
+     * @return
+     */
+    CommentDeleteFormResponse deleteForm(Long commentId);
+
+    /**
+     * 削除
+     *
+     * @param commentDeleteForm
+     */
+    void delete(CommentDeleteForm commentDeleteForm);
 }
