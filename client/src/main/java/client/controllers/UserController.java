@@ -21,7 +21,7 @@ import java.util.Optional;
  * ユーザーコントローラ
  */
 @Controller
-public class UserController {
+public class UserController extends HomeController {
     @Autowired
     UserService userService;
 
@@ -65,9 +65,7 @@ public class UserController {
     @GetMapping(value = "user/{userId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Long userId) {
-        String mail = getMailByPrincipal();
-        
-        Optional<User> userOpt = userService.getByMail(mail);
+        Optional<User> userOpt = userService.getByMail(getMail());
         if (!userOpt.isPresent()) {
             mav.setViewName("articles/index");
             String flash = "あなたのアカウントは削除されています";
@@ -99,9 +97,7 @@ public class UserController {
     @GetMapping(value = "user/edit/{userId}")
     public ModelAndView edit(ModelAndView mav,
                              @PathVariable Long userId) {
-        String mail = getMailByPrincipal();
-
-        Optional<User> userOpt = userService.getByMail(mail);
+        Optional<User> userOpt = userService.getByMail(getMail());
         if (!userOpt.isPresent()) {
             mav.setViewName("articles/index");
             String flash = "あなたのアカウントは削除されています";
@@ -134,9 +130,7 @@ public class UserController {
     @PostMapping(value = "user/update")
     public String update(RedirectAttributes redirectAttributes,
                          @ModelAttribute("userForm")UserForm userForm) throws NotFoundException {
-        String mail = getMailByPrincipal();
-
-        Optional<User> userOpt = userService.getByMail(mail);
+        Optional<User> userOpt = userService.getByMail(getMail());
         if (!userOpt.isPresent()) {
             String flash = "あなたのアカウントは削除されています";
             redirectAttributes.addAttribute("flash", flash);
@@ -154,22 +148,4 @@ public class UserController {
         userService.update(userForm);
         return "redirect:/";
     }
-
-    /**
-     * プリンシパルからアクセス者のメールアドレスを取得する
-     *
-     * @return
-     */
-    private String getMailByPrincipal() {
-        Object principal = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-        if (principal instanceof UserDetails) {
-            return ((UserDetails)principal).getUsername();
-        } else {
-            return principal.toString();
-        }
-    }
-
 }

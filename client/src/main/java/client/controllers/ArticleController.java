@@ -25,9 +25,6 @@ public class ArticleController extends HomeController {
     @Autowired
     ArticleService articleService;
 
-    @PersistenceContext
-    EntityManager entityManager;
-
     /**
      * 記事一覧画面表示
      *
@@ -36,11 +33,7 @@ public class ArticleController extends HomeController {
      */
     @GetMapping(value = "/")
     public ModelAndView index(ModelAndView mav) {
-        UserDaoImpl userDao = new UserDaoImpl(entityManager);
-        User user = userDao.findByMail(getMail())
-                .orElseThrow(() -> new UsernameNotFoundException(""));
-        mav.addObject("user", user);
-
+        mav.addObject("user", getUser());
         mav.setViewName("articles/index");
         mav.addObject("articles", articleService.getAll());
         return mav;
@@ -55,12 +48,7 @@ public class ArticleController extends HomeController {
     @GetMapping(value = "article/{articleId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Long articleId) {
-        UserDaoImpl userDao = new UserDaoImpl(entityManager);
-
-        User user = userDao.findByMail(getMail())
-                .orElseThrow(() -> new UsernameNotFoundException(""));
-
-        mav.addObject("user", user);
+        mav.addObject("user", getUser());
 
         Optional<Article> article = articleService.getById(articleId);
         if (article.isPresent()) {
