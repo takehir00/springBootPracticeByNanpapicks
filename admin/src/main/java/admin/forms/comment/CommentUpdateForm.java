@@ -10,6 +10,7 @@ public class CommentUpdateForm {
     @Tolerate
     public CommentUpdateForm(){};
 
+    public Long id;
     public String content;
     public Long userId;
     public Long articleId;

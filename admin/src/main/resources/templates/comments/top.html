@@ -27,7 +27,7 @@
             <td th:text="${comment.userId != null}? ${comment.userId} : '紐づくユーザーが見つかりません'"></td>
             <td th:text="${comment.articleId != null}? ${comment.articleId} : '紐づく記事が見つかりません'"></td>
             <td>
-                <a href="articles/editForm.html" th:href="@{/admin/article/edit/{commentId}(commentId=${comment.id})}">編集</a>
+                <a href="articles/editForm.html" th:href="@{/admin/comment/edit/{commentId}(commentId=${comment.id})}">編集</a>
             </td>
             <td>
                 <a href="articles/deleteForm.html" th:href="@{/admin/article/destroy/{commentId}(commentId=${comment.id})}">削除</a>

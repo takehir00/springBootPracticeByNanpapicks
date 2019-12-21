@@ -2,12 +2,14 @@ package admin.controllers;
 
 import admin.forms.comment.CommentRegisterForm;
 import admin.responses.CommentRegisterFormResponse;
+import admin.responses.CommentUpdateFormResponse;
 import admin.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,9 +39,9 @@ public class CommentController {
      */
     @GetMapping(value = "/admin/comment/register")
     public ModelAndView registerForm(ModelAndView mav) {
-        CommentRegisterFormResponse form =
+        CommentRegisterFormResponse response =
                 commentService.registerForm();
-        mav.addObject("commentRegisterFormResponse", form);
+        mav.addObject("commentRegisterFormResponse", response);
         mav.setViewName("comments/registerForm");
         return mav;
     }
@@ -58,10 +60,20 @@ public class CommentController {
         return "redirect:/admin/comment";
     }
 
-    public ModelAndView updateForm(ModelAndView mav) {
-        // レスポンスクラスに値の入ったフォームクラスを持たせてviewに渡す
-
+    /**
+     * 更新フォーム
+     *
+     * @param mav
+     * @param commentId
+     * @return
+     */
+    @GetMapping(value = "/admin/comment/edit/{commentId}")
+    public ModelAndView updateForm(ModelAndView mav,
+                                   @PathVariable Long commentId) {
+        CommentUpdateFormResponse response =
+                commentService.updateForm(commentId);
+        mav.addObject("commentUpdateFormResponse", response);
+        mav.setViewName("comments/updateForm");
         return mav;
-
     }
 }
