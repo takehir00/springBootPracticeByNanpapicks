@@ -1,5 +1,6 @@
 package admin.services;
 
+import admin.forms.comment.CommentDeleteForm;
 import admin.forms.comment.CommentRegisterForm;
 import admin.forms.comment.CommentUpdateForm;
 import admin.responses.CommentDeleteFormResponse;
@@ -51,4 +52,11 @@ public interface CommentService {
      * @return
      */
     CommentDeleteFormResponse deleteForm(Long commentId);
+
+    /**
+     * 削除
+     *
+     * @param commentDeleteForm
+     */
+    void delete(CommentDeleteForm commentDeleteForm);
 }

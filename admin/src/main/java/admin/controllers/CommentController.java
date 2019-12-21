@@ -1,5 +1,6 @@
 package admin.controllers;
 
+import admin.forms.comment.CommentDeleteForm;
 import admin.forms.comment.CommentRegisterForm;
 import admin.forms.comment.CommentUpdateForm;
 import admin.responses.CommentDeleteFormResponse;
@@ -9,10 +10,7 @@ import admin.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -101,5 +99,13 @@ public class CommentController {
         mav.addObject("commentDeleteFormResponse", response);
         mav.setViewName("comments/deleteForm");
         return mav;
+    }
+
+    @Transactional
+    @DeleteMapping("/admin/comment/delete")
+    public String delete(
+            @ModelAttribute("commentDeleteForm") CommentDeleteForm commentDeleteForm) {
+        commentService.delete(commentDeleteForm);
+        return "redirect:/admin/comment";
     }
 }

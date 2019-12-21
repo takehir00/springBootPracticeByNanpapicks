@@ -32,4 +32,8 @@ public class CommentRepository {
     public void update(Comment entity) {
         entityManager.merge(entity);
     }
+
+    public void delete(Comment entity) {
+        entityManager.remove(entity);
+    }
 }

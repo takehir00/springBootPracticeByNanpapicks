@@ -17,14 +17,14 @@
 <div th:insert="~{nav :: copy}"></div>
 <div class="admin-content">
     <p>このコメントを削除しますか？</p>
-    <form th:method="delete" action="/admin/article/delete" th:object="${commentDeleteForm}">
+    <form th:method="delete" action="/admin/comment/delete" th:object="${commentDeleteForm}">
         <input type="hidden" name="id" th:value="${commentDeleteFormResponse.commentDeleteForm.id}"/>
         <table>
             <tr>
                 <th>id</th>
-                <th>url</th>
-                <th>title</th>
-                <th>src</th>
+                <th>本文</th>
+                <th>ユーザーID</th>
+                <th>記事ID</th>
             </tr>
             <tr>
                 <td th:text="${commentDeleteFormResponse.commentDeleteForm.id}"></td>

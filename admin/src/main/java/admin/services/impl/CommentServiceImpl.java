@@ -113,4 +113,10 @@ public class CommentServiceImpl implements CommentService {
                                 .build())
                 .build();
     }
+
+    @Override
+    public void delete(CommentDeleteForm commentDeleteForm) {
+        Comment comment = commentRepository.findById(commentDeleteForm.id);
+        commentRepository.delete(comment);
+    }
 }
