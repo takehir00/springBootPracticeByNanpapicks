@@ -3,6 +3,7 @@ package admin.services;
 import admin.forms.comment.CommentRegisterForm;
 import admin.responses.CommentRegisterFormResponse;
 import admin.responses.CommentTopResponse;
+import admin.responses.CommentUpdateFormResponse;
 
 public interface CommentService {
     /**
@@ -25,4 +26,12 @@ public interface CommentService {
      * @param commentRegisterForm
      */
     void create(CommentRegisterForm commentRegisterForm);
+
+    /**
+     * 更新フォーム
+     *
+     * @param commentId
+     * @return
+     */
+    CommentUpdateFormResponse updateForm(Long commentId);
 }
