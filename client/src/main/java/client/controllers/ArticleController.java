@@ -1,5 +1,6 @@
 package client.controllers;
 
+import client.responses.articles.ArticleDetailResponse;
 import db.daos.impl.UserDaoImpl;
 import db.entities.Article;
 import client.services.ArticleService;
@@ -50,14 +51,14 @@ public class ArticleController extends HomeController {
                              @PathVariable Long articleId) {
         mav.addObject("user", getUser());
 
-        Optional<Article> article = articleService.getById(articleId);
-        if (article.isPresent()) {
-            mav.setViewName("articles/show");
-            mav.addObject("article", article.get());
+        ArticleDetailResponse response = articleService.detail(articleId);
+        if (response == null) {
+            mav.setViewName("articles/index");
+            mav.addObject("flash", "指定した記事は存在しません");
             return mav;
         }
-        mav.setViewName("articles/index");
-        mav.addObject("flash", "指定した記事は存在しません");
+        mav.setViewName("articles/show");
+        mav.addObject("response", response);
         return mav;
     }
 }
