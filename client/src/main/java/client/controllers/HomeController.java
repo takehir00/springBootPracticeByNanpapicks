@@ -15,22 +15,13 @@ public class HomeController {
     @PersistenceContext
     EntityManager entityManager;
 
-    /** ユーザープリンシパル */
-    protected final Object principal;
-
-    public HomeController() {
-        this.principal = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-    }
-
     /**
      * ユーザープリンシパルからユーザーのメールアドレスを取得する
      *
      * @return
      */
     protected String getMail() {
+        Object principal = getPrincipal();
         if (principal instanceof UserDetails) {
             return ((UserDetails)principal).getUsername();
         } else {
@@ -47,5 +38,17 @@ public class HomeController {
         UserDaoImpl userDao = new UserDaoImpl(entityManager);
         return userDao.findByMail(getMail())
                 .orElseThrow(() -> new UsernameNotFoundException(""));
+    }
+
+    /**
+     * ユーザープリンシパルを取得
+     *
+     * @return
+     */
+    private Object getPrincipal() {
+        return SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
     }
 }
