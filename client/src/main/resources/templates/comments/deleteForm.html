@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nanpa_Picks</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/application.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/css/articles.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
+</head>
+<body>
+<div th:insert="~{header :: copy}"></div>
+
+<div class="contents">
+    <div class="login">
+        <p>このコメントを削除しますか？</p>
+        <div class="form">
+            <form th:method="delete" th:action="@{'/comment/delete'}" th:object="${commentDeleteForm}">
+                <input type="hidden" name="id" th:value="${response.commentDeleteForm.id}" />
+                <input type="hidden" name="articleId" th:value="${response.commentDeleteForm.articleId}" />
+                <div th:text="${response.commentDeleteForm.content}"></div>
+                <input class="btn btn-primary login-btn" type="submit" value="削除" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:insert="~{footer :: copy}"></div>
+</body>
+</html>

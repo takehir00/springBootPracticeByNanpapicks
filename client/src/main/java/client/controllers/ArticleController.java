@@ -1,5 +1,6 @@
 package client.controllers;
 
+import client.responses.articles.ArticleDetailResponse;
 import db.daos.impl.UserDaoImpl;
 import db.entities.Article;
 import client.services.ArticleService;
@@ -21,12 +22,9 @@ import java.util.Optional;
  * 記事コントローラ
  */
 @Controller
-public class ArticleController {
+public class ArticleController extends HomeController {
     @Autowired
     ArticleService articleService;
-
-    @PersistenceContext
-    EntityManager entityManager;
 
     /**
      * 記事一覧画面表示
@@ -36,24 +34,7 @@ public class ArticleController {
      */
     @GetMapping(value = "/")
     public ModelAndView index(ModelAndView mav) {
-        String mail;
-        //対話中のユーザーのプリンシパルを取得する
-        Object principal = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            //ユーザー名からユーザー情報を取得する
-            mail = ((UserDetails)principal).getUsername();
-        } else {
-            mail = principal.toString();
-        }
-        UserDaoImpl userDao = new UserDaoImpl(entityManager);
-        User user = userDao.findByMail(mail)
-                .orElseThrow(() -> new UsernameNotFoundException(""));
-        mav.addObject("user", user);
-
+        mav.addObject("user", getUser());
         mav.setViewName("articles/index");
         mav.addObject("articles", articleService.getAll());
         return mav;
@@ -68,30 +49,16 @@ public class ArticleController {
     @GetMapping(value = "article/{articleId}")
     public ModelAndView show(ModelAndView mav,
                              @PathVariable Long articleId) {
-        String mail;
-        Object principal = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-        if (principal instanceof UserDetails) {
-            //ユーザー名からユーザー情報を取得する
-            mail = ((UserDetails)principal).getUsername();
-        } else {
-            mail = principal.toString();
-        }
-        UserDaoImpl userDao = new UserDaoImpl(entityManager);
-        User user = userDao.findByMail(mail)
-                .orElseThrow(() -> new UsernameNotFoundException(""));
-        mav.addObject("user", user);
+        mav.addObject("user", getUser());
 
-        Optional<Article> article = articleService.getById(articleId);
-        if (article.isPresent()) {
-            mav.setViewName("articles/show");
-            mav.addObject("article", article.get());
+        ArticleDetailResponse response = articleService.detail(articleId);
+        if (response == null) {
+            mav.setViewName("articles/index");
+            mav.addObject("flash", "指定した記事は存在しません");
             return mav;
         }
-        mav.setViewName("articles/index");
-        mav.addObject("flash", "指定した記事は存在しません");
+        mav.setViewName("articles/show");
+        mav.addObject("response", response);
         return mav;
     }
 }

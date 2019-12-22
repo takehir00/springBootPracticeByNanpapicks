@@ -91,6 +91,13 @@ public class CommentController {
         return "redirect:/admin/comment";
     }
 
+    /**
+     * 削除フォーム
+     *
+     * @param mav
+     * @param commentId
+     * @return
+     */
     @GetMapping("/admin/comment/delete/{commentId}")
     public ModelAndView deleteForm(ModelAndView mav,
                              @PathVariable Long commentId) {
@@ -101,6 +108,12 @@ public class CommentController {
         return mav;
     }
 
+    /**
+     * 削除
+     *
+     * @param commentDeleteForm
+     * @return
+     */
     @Transactional
     @DeleteMapping("/admin/comment/delete")
     public String delete(
