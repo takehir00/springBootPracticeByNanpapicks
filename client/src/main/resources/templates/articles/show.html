@@ -40,6 +40,7 @@
                 <img th:src="${comment.user.imageUrl}" th:height="50" th:width="50"/>
                 <div th:text="${comment.user.name}"></div>
                 <div th:text="${comment.content}"></div>
+                <a href="comments/deleteForm.html" th:href="@{/comment/delete/{commentId}(commentId=${comment.id})}">削除</a>
             </div>
         </div>
     </div>

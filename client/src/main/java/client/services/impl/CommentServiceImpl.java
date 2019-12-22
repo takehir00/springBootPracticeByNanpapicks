@@ -1,6 +1,8 @@
 package client.services.impl;
 
 import client.forms.CommentCreateForm;
+import client.forms.CommentDeleteForm;
+import client.responses.comments.CommentDeleteFormResponse;
 import client.services.CommentService;
 import db.entities.Article;
 import db.entities.Comment;
@@ -23,5 +25,24 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void create(CommentCreateForm commentCreateForm, User user) {
         commentRepository.create(commentCreateForm.asEntity(user));
+    }
+
+    @Override
+    public CommentDeleteFormResponse deleteForm(Long commentId) {
+        Comment comment = commentRepository.findById(commentId);
+        return CommentDeleteFormResponse.builder()
+                .commentDeleteForm(
+                        CommentDeleteForm.builder()
+                                .id(comment.id)
+                                .articleId(comment.article.id)
+                                .content(comment.content)
+                                .build())
+                .build();
+    }
+
+    @Override
+    public void delete(CommentDeleteForm commentDeleteForm) {
+        Comment comment = commentRepository.findById(commentDeleteForm.id);
+        commentRepository.delete(comment);
     }
 }
