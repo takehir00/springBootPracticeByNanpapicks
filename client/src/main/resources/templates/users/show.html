@@ -16,13 +16,23 @@
     <div class="user-details">
         <div class="row">
             <div class="user-image col-sm-12">
-                <img class="user-image-tag" th:src="${user.imageUrl}" th:height="100" th:width="100"/>
+                <img class="user-image-tag" th:src="${response.userModel.imageUrl}" th:height="100" th:width="100"/>
             </div>
-            <div class="user-name col-sm-12" th:text="${user.name}"></div>
-            <div class="user-introduction col-sm-12" th:text="${user.introduction}"></div>
+            <div class="user-name col-sm-12" th:text="${response.userModel.name}"></div>
+            <div class="user-introduction col-sm-12" th:text="${response.userModel.introduction}"></div>
             <div class="user-edit col-sm-12">
-                <a href="users/editForm.html" th:href="@{/user/edit/{userId}(userId=${user.id})}">アカウント編集</a>
+                <a href="users/editForm.html" th:href="@{/user/edit/{userId}(userId=${response.userModel.id})}">アカウント編集</a>
             </div>
+        </div>
+    </div>
+
+    <div class="user-articles">
+        <div class="user-articles-title">
+            <p>コメントした記事</p>
+        </div>
+        <div class="user-article row" th:each="article: ${response.articleModelList}">
+            <img class="user-article-image col-sm-3" th:src="${article.imageUrl}" th:height="100" th:width="100"/>
+            <a class="user-article-title col-sm-9" href="users/editForm.html" th:href="@{/user/edit/{userId}(userId=${article.id})}">記事名</a>
         </div>
     </div>
 </div>

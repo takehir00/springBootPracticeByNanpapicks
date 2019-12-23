@@ -1,6 +1,7 @@
 package client.controllers;
 
 import client.forms.UserForm;
+import client.responses.users.UserShowResponse;
 import client.services.ArticleService;
 import client.services.UserService;
 import db.entities.User;
@@ -83,7 +84,7 @@ public class UserController extends HomeController {
             return mav;
         }
         mav.setViewName("users/show");
-        mav.addObject("user",userOpt.get());
+        mav.addObject("response",userService.show(userOpt.get()));
         return mav;
     }
 
