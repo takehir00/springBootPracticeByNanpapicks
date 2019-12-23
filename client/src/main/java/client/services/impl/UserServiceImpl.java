@@ -1,9 +1,13 @@
 package client.services.impl;
 
 import client.forms.UserForm;
+import client.model.ArticleModel;
+import client.model.UserModel;
+import client.responses.users.UserShowResponse;
 import client.responses.users.UserUpdateFormResponse;
 import client.services.UserService;
 import db.daos.impl.UserDaoImpl;
+import db.entities.Article;
 import db.entities.User;
 import db.repositories.UserRepository;
 import javassist.NotFoundException;
@@ -16,6 +20,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @EntityScan(basePackageClasses = User.class)
@@ -65,6 +70,31 @@ public class UserServiceImpl implements UserService {
                 .introduction(user.introduction)
                 .imageUrl(user.imageUrl)
                 .password(user.password)
+                .build();
+    }
+
+    @Override
+    public UserShowResponse show(User user) {
+        return UserShowResponse.builder()
+                .userModel(
+                        UserModel.builder()
+                                .id(user.id)
+                                .name(user.name)
+                                .mail(user.mail)
+                                .introduction(user.introduction)
+                                .imageUrl(user.imageUrl)
+                                .build())
+                .articleModelList(
+                        user.commentList.stream()
+                                .map(comment -> {
+                                    Article article = comment.article;
+                                    return ArticleModel.builder()
+                                            .id(article.id)
+                                            .title(article.title)
+                                            .imageUrl(article.imageUrl)
+                                            .url(article.url)
+                                            .build();
+                                }).collect(Collectors.toList()))
                 .build();
     }
 

@@ -1,6 +1,7 @@
 package client.services;
 
 import client.forms.UserForm;
+import client.responses.users.UserShowResponse;
 import client.responses.users.UserUpdateFormResponse;
 import db.entities.User;
 import javassist.NotFoundException;
@@ -53,4 +54,12 @@ public interface UserService {
      * @param user
      */
     UserUpdateFormResponse createEditForm(User user);
+
+    /**
+     * ユーザー詳細画面レスポンス
+     *
+     * @param user
+     * @return
+     */
+    UserShowResponse show(User user);
 }
