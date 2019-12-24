@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Builder
@@ -15,8 +17,12 @@ public class CommentRegisterForm {
     @Tolerate
     public CommentRegisterForm(){};
 
+    @NotNull
+    @Size(max = 300)
     public String content;
+    @NotNull
     public Long userId;
+    @NotNull
     public Long articleId;
 
     public Comment asEntity() {

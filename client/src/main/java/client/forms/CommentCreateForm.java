@@ -7,13 +7,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 @Builder
 @Data
 public class CommentCreateForm {
     @Tolerate
     public CommentCreateForm(){};
 
+    @NotNull
+    @Size(max = 300)
     public String comment;
+    @NotNull
     public Long articleId;
 
     public Comment asEntity(User user) {

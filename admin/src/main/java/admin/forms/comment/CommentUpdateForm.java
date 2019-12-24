@@ -7,15 +7,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 
+import javax.validation.constraints.NotNull;
+
 @Builder
 @Data
 public class CommentUpdateForm {
     @Tolerate
     public CommentUpdateForm(){};
 
+    @NotNull
     public Long id;
+    @NotNull
     public String content;
+    @NotNull
     public Long userId;
+    @NotNull
     public Long articleId;
 
     public Comment asEntity() {
