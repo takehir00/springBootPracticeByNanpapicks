@@ -14,9 +14,9 @@ public class CommentDeleteForm {
     @Tolerate
     public CommentDeleteForm(){};
 
-    @NotEmpty
+    @NotNull
     public Long id;
-    @NotEmpty
+    @NotNull
     public Long articleId;
 
     public String content;

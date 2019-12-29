@@ -21,7 +21,7 @@ public class CommentCreateForm {
     @NotEmpty
     @Size(max = 300, message = "300文字以下で入力してください")
     public String comment;
-    @NotEmpty
+    @NotNull
     public Long articleId;
 
     public Comment asEntity(User user) {
