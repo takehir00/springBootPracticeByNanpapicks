@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -13,9 +14,9 @@ public class CommentDeleteForm {
     @Tolerate
     public CommentDeleteForm(){};
 
-    @NotNull
+    @NotEmpty
     public Long id;
-    @NotNull
+    @NotEmpty
     public Long articleId;
 
     public String content;
