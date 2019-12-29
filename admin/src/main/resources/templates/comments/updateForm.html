@@ -14,25 +14,28 @@
     <h1 class="admin-content-title">記事更新フォーム</h1>
     <table>
         <form method="post" action="/admin/comment/edit" th:object="${commentUpdateForm}">
-            <input type="hidden" name="id" id="id" th:value="${commentUpdateFormResponse.commentUpdateForm.id}" />
+            <input type="hidden" name="id" id="id" th:value="${commentUpdateForm.id}" />
             <tr>
                 <td><label for="content">コメント本文</label></td>
-                <td><input type="text" name="content" id="content" th:value="${commentUpdateFormResponse.commentUpdateForm.content}" /></td>
+                <td><input type="text" name="content" id="content" th:value="${commentUpdateForm.content}" /></td>
+                <td th:if="${contentError != null}" th:text="${contentError.defaultMessage}"></td>
             </tr>
             <tr>
                 <td><label for="userId">ユーザーID</label></td>
                 <td>
                     <select name="userId" id="userId">
-                        <option th:each="userId : ${commentUpdateFormResponse.userIdList}" th:text="${userId}" th:value="${userId}" th:selected="${userId} == ${commentUpdateFormResponse.commentUpdateForm.userId}"></option>
+                        <option th:each="userId : ${commentUpdateFormResponse.userIdList}" th:text="${userId}" th:value="${userId}" th:selected="${userId} == ${commentUpdateForm.userId}"></option>
                     </select>
+                <div th:if="${userId != null}" th:text="${userId.defaultMessage}"></div>
                 </td>
             </tr>
             <tr>
                 <td><label for="articleId">記事ID</label></td>
                 <td>
                     <select name="articleId" id="articleId">
-                        <option th:each="articleId : ${commentUpdateFormResponse.articleIdList}" th:text="${articleId}" th:value="${articleId}" th:selected="${articleId} == ${commentUpdateFormResponse.commentUpdateForm.articleId}"></option>
+                        <option th:each="articleId : ${commentUpdateFormResponse.articleIdList}" th:text="${articleId}" th:value="${articleId}" th:selected="${articleId} == ${commentUpdateForm.articleId}"></option>
                     </select>
+                    <div th:if="${articleId != null}" th:text="${articleId.defaultMessage}"></div>
                 </td>
             </tr>
             <tr>

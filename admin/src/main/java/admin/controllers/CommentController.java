@@ -42,7 +42,9 @@ public class CommentController {
      * @return
      */
     @GetMapping(value = "/admin/comment/register")
-    public ModelAndView registerForm(ModelAndView mav) {
+    public ModelAndView registerForm(
+            ModelAndView mav,
+            @ModelAttribute("commentRegisterForm") CommentRegisterForm commentRegisterForm) {
         CommentRegisterFormResponse response =
                 commentService.registerForm();
         mav.addObject("commentRegisterFormResponse", response);
@@ -86,8 +88,11 @@ public class CommentController {
     public ModelAndView updateForm(ModelAndView mav,
                                    @PathVariable Long commentId) {
         CommentUpdateFormResponse response =
+                commentService.updateFormResponse(commentId);
+        CommentUpdateForm form=
                 commentService.updateForm(commentId);
         mav.addObject("commentUpdateFormResponse", response);
+        mav.addObject("commentUpdateForm", form);
         mav.setViewName("comments/updateForm");
         return mav;
     }
@@ -101,7 +106,22 @@ public class CommentController {
     @Transactional
     @PostMapping("/admin/comment/edit")
     public String update(
-            @ModelAttribute("commentUpdateForm")CommentUpdateForm commentUpdateForm) {
+            @Validated @ModelAttribute("commentUpdateForm")CommentUpdateForm commentUpdateForm,
+            BindingResult bindingResult,
+            RedirectAttributes attributes) {
+        if (bindingResult.hasErrors()) {
+            CommentUpdateFormResponse response =
+                    commentService.updateFormResponse(commentUpdateForm.getId());
+            FieldError contentError =bindingResult.getFieldError("content");
+            FieldError userIdError =bindingResult.getFieldError("userId");
+            FieldError articleId =bindingResult.getFieldError("articleId");
+            attributes.addFlashAttribute("commentUpdateForm", commentUpdateForm);
+            attributes.addFlashAttribute("commentUpdateFormResponse", response);
+            attributes.addFlashAttribute("contentError", contentError);
+            attributes.addFlashAttribute("userIdError", userIdError);
+            attributes.addFlashAttribute("articleId", articleId);
+            return "redirect:/admin/comment/edit/" + commentUpdateForm.getId();
+        }
         commentService.update(commentUpdateForm);
         return "redirect:/admin/comment";
     }
