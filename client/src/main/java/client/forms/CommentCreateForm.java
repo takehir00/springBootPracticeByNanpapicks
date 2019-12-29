@@ -20,7 +20,7 @@ public class CommentCreateForm {
 
     @NotEmpty
     @Size(max = 300, message = "300文字以下で入力してください")
-    public String comment;
+    public String content;
     @NotNull
     public Long articleId;
 
@@ -28,7 +28,7 @@ public class CommentCreateForm {
         Article article = new Article();
         article.id =articleId;
         return Comment.builder()
-                .content(this.comment)
+                .content(this.content)
                 .user(user)
                 .article(article)
                 .build();
