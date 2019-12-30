@@ -33,6 +33,7 @@
                     </div>
                     <input class="btn btn-primary col-sm-2" type="submit" value="投稿する" />
                 </form>
+                <div th:if="${contentError != null}" th:text="${contentError.defaultMessage}"></div>
             </div>
         </div>
         <div class="comments">
