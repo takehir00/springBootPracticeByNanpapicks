@@ -45,15 +45,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(UserForm userForm) {
-        User user = new User();
-        user.id = userForm.id;
-        user.name = userForm.name;
-        user.mail = userForm.mail;
-        user.introduction = userForm.introduction;
-        user.imageUrl = userForm.imageUrl;
-        user.password = userForm.password;
-        userRepository.saveAndFlush(user);
+    public void update(UserUpdateForm userForm) {
+        Optional<User> userOpt = userRepository.findById(userForm.id);
+        userOpt.ifPresent(user -> {
+            user.name = userForm.name;
+            user.mail = userForm.mail;
+            user.introduction = userForm.introduction;
+            user.imageUrl = userForm.imageUrl;
+            userRepository.save(user);
+        });
     }
 
     @Override
