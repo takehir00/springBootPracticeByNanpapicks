@@ -1,15 +1,20 @@
 package admin.controllers;
 
 import admin.forms.user.UserForm;
+import admin.forms.user.UserUpdateForm;
 import db.entities.User;
 import admin.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,7 +48,9 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/admin/user/registerForm", method = RequestMethod.GET)
-    public ModelAndView registerForm(ModelAndView mav) {
+    public ModelAndView registerForm(
+            ModelAndView mav,
+            @ModelAttribute("userForm")UserForm userForm) {
         mav.setViewName("users/registerForm");
         return mav;
     }
@@ -55,7 +62,22 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "admin/user", method = RequestMethod.POST)
-    public String register(@ModelAttribute("userForm")UserForm userForm) {
+    public String register(
+            @Validated @ModelAttribute("userForm")UserForm userForm,
+            BindingResult bindingResult,
+            RedirectAttributes attributes) {
+        if (bindingResult.hasErrors()) {
+            FieldError nameError =bindingResult.getFieldError("name");
+            FieldError mailError =bindingResult.getFieldError("mail");
+            FieldError introductionError =bindingResult.getFieldError("introduction");
+            FieldError passwordError =bindingResult.getFieldError("password");
+            attributes.addFlashAttribute("userForm", userForm);
+            attributes.addFlashAttribute("nameError", nameError);
+            attributes.addFlashAttribute("mailError", mailError);
+            attributes.addFlashAttribute("introductionError", introductionError);
+            attributes.addFlashAttribute("passwordError", passwordError);
+            return "redirect:/admin/user/registerForm";
+        }
         userService.create(userForm);
         return "redirect:/admin/user";
     }
@@ -70,10 +92,10 @@ public class UserController {
     @RequestMapping(value = "/admin/user/edit/{userId}", method = RequestMethod.GET)
     public ModelAndView edit(ModelAndView mav,
                                  @PathVariable Long userId) {
-        Optional<User> userOpt = userService.getById(userId);
-        if (userOpt.isPresent()) {
+        UserUpdateForm form = userService.updateForm(userId);
+        if (form != null) {
             mav.setViewName("/users/editForm");
-            mav.addObject("user", userOpt.get());
+            mav.addObject("userUpdateForm", form);
             return mav;
         } else {
             String flash = "該当の記事はありません";
@@ -88,12 +110,12 @@ public class UserController {
     /**
      * 更新
      *
-     * @param userForm
+     * @param userUpdateForm
      * @return
      */
     @RequestMapping(value = "/admin/user/update", method = RequestMethod.POST)
-    public String update(@ModelAttribute("userForm")UserForm userForm) {
-        userService.update(userForm);
+    public String update(@ModelAttribute("userUpdateForm")UserForm userUpdateForm) {
+        userService.update(userUpdateForm);
         return "redirect:/admin/user";
     }
 

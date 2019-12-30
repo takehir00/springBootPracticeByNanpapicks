@@ -1,6 +1,7 @@
 package admin.services.impl;
 
 import admin.forms.user.UserForm;
+import admin.forms.user.UserUpdateForm;
 import db.entities.User;
 import db.repositories.UserRepository;
 import admin.services.UserService;
@@ -61,5 +62,21 @@ public class UserServiceImpl implements UserService {
        userOpt.ifPresent(user -> {
            userRepository.delete(user);
        });
+    }
+
+    @Override
+    public UserUpdateForm updateForm(Long userId) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            return UserUpdateForm.builder()
+                    .id(user.id)
+                    .name(user.name)
+                    .mail(user.mail)
+                    .introduction(user.introduction)
+                    .imageUrl(user.imageUrl)
+                    .build();
+        }
+        return null;
     }
 }

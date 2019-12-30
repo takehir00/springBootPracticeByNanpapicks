@@ -1,6 +1,7 @@
 package admin.services;
 
 import admin.forms.user.UserForm;
+import admin.forms.user.UserUpdateForm;
 import db.entities.User;
 
 import java.util.List;
@@ -42,4 +43,12 @@ public interface UserService {
      * @param userForm
      */
     void delete(UserForm userForm);
+
+    /**
+     * ユーザー更新フォーム
+     *
+     * @param userId
+     * @return
+     */
+    UserUpdateForm updateForm(Long userId);
 }
