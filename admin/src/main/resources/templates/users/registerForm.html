@@ -16,23 +16,28 @@
         <form method="post" action="/admin/user" th:object="${userForm}">
             <tr>
                 <td><label for="name">名前</label></td>
-                <td><input type="text" name="name" id="name" /></td>
+                <td><input type="text" name="name" id="name" th:value="*{name}" /></td>
+                <td th:if="${nameError != null}" th:text="${nameError.defaultMessage}"></td>
             </tr>
             <tr>
                 <td><label for="mail">メールアドレス</label></td>
-                <td><input type="text" name="mail" id="mail"/></td>
+                <td><input type="text" name="mail" id="mail" th:value="*{mail}"/></td>
+                <td th:if="${mailError != null}" th:text="${mailError.defaultMessage}"></td>
             </tr>
             <tr>
                 <td><label for="introduction">自己紹介</label></td>
-                <td><input type="text" name="introduction" id="introduction"/></td>
+                <td><input type="text" name="introduction" id="introduction" th:value="*{introduction}"/></td>
+                <td th:if="${introductionError != null}" th:text="${introductionError.defaultMessage}"></td>
             </tr>
             <tr>
                 <td><label for="imageUrl">画像URL</label></td>
-                <td><input type="text" name="imageUrl" id="imageUrl"/></td>
+                <td><input type="text" name="imageUrl" id="imageUrl" th:value="*{imageUrl}"/></td>
+                <td th:if="${introductionError != null}" th:text="${introductionError.defaultMessage}"></td>
             </tr>
             <tr>
                 <td><label for="password">パスワード</label></td>
-                <td><input type="text" name="password" id="password"/></td>
+                <td><input type="text" name="password" id="password" th:value="*{password}"/></td>
+                <td th:if="${introductionError != null}" th:text="${introductionError.defaultMessage}"></td>
             </tr>
             <tr>
                 <td></td>
