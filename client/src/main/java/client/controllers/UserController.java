@@ -54,7 +54,7 @@ public class UserController extends HomeController {
      * @param userForm
      * @return
      */
-    @PostMapping(value = "user")
+    @PostMapping(value = "signUp")
     public String create(@ModelAttribute("userForm")UserForm userForm) {
         userService.create(userForm);
         return "redirect:/";
