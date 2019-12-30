@@ -2,6 +2,7 @@ package admin.forms.user;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Tolerate;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -10,6 +11,9 @@ import javax.validation.constraints.Size;
 @Builder
 @Data
 public class UserUpdateForm {
+    @Tolerate
+    public UserUpdateForm(){};
+
     public Long id;
 
     @NotEmpty
