@@ -35,7 +35,7 @@ public interface UserService {
      *
      * @param userForm
      */
-    void update(UserForm userForm);
+    void update(UserUpdateForm userForm);
 
     /**
      * ユーザー削除

@@ -32,12 +32,12 @@
             <tr>
                 <td><label for="imageUrl">画像URL</label></td>
                 <td><input type="text" name="imageUrl" id="imageUrl" th:value="*{imageUrl}"/></td>
-                <td th:if="${introductionError != null}" th:text="${introductionError.defaultMessage}"></td>
+                <td th:if="${imageUrlError != null}" th:text="${imageUrlError.defaultMessage}"></td>
             </tr>
             <tr>
                 <td><label for="password">パスワード</label></td>
                 <td><input type="text" name="password" id="password" th:value="*{password}"/></td>
-                <td th:if="${introductionError != null}" th:text="${introductionError.defaultMessage}"></td>
+                <td th:if="${passwordError != null}" th:text="${passwordError.defaultMessage}"></td>
             </tr>
             <tr>
                 <td></td>

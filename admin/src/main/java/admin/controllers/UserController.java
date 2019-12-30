@@ -114,7 +114,22 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/admin/user/update", method = RequestMethod.POST)
-    public String update(@ModelAttribute("userUpdateForm")UserForm userUpdateForm) {
+    public String update(
+            @Validated @ModelAttribute("userUpdateForm")UserUpdateForm userUpdateForm,
+            BindingResult bindingResult,
+            RedirectAttributes attributes) {
+        if (bindingResult.hasErrors()) {
+            FieldError nameError =bindingResult.getFieldError("name");
+            FieldError mailError =bindingResult.getFieldError("mail");
+            FieldError introductionError =bindingResult.getFieldError("introduction");
+            FieldError imageUrlError =bindingResult.getFieldError("imageUrl");
+            attributes.addFlashAttribute("userUpdateForm", userUpdateForm);
+            attributes.addFlashAttribute("nameError", nameError);
+            attributes.addFlashAttribute("mailError", mailError);
+            attributes.addFlashAttribute("introductionError", introductionError);
+            attributes.addFlashAttribute("introductionError", imageUrlError);
+            return "redirect:/admin/user/edit/" + userUpdateForm.id;
+        }
         userService.update(userUpdateForm);
         return "redirect:/admin/user";
     }
