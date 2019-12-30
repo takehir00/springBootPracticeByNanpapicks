@@ -127,7 +127,7 @@ public class UserController {
             attributes.addFlashAttribute("nameError", nameError);
             attributes.addFlashAttribute("mailError", mailError);
             attributes.addFlashAttribute("introductionError", introductionError);
-            attributes.addFlashAttribute("introductionError", imageUrlError);
+            attributes.addFlashAttribute("imageUrlError", imageUrlError);
             return "redirect:/admin/user/edit/" + userUpdateForm.id;
         }
         userService.update(userUpdateForm);

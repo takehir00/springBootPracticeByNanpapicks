@@ -1,6 +1,7 @@
 package client.services;
 
 import client.forms.UserForm;
+import client.forms.UserUpdateForm;
 import client.responses.users.UserShowResponse;
 import client.responses.users.UserUpdateFormResponse;
 import db.entities.User;
@@ -37,7 +38,7 @@ public interface UserService {
      *
      * @param userForm
      */
-    void update(UserForm userForm) throws NotFoundException;
+    void update(UserUpdateForm userForm) throws NotFoundException;
 
     /**
      * IDとメールアドレスで取得
@@ -62,4 +63,12 @@ public interface UserService {
      * @return
      */
     UserShowResponse show(User user);
+
+    /**
+     * 更新フォーム
+     *
+     * @param user
+     * @return
+     */
+    UserUpdateForm updateForm(User user);
 }

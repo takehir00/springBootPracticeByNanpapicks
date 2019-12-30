@@ -1,6 +1,7 @@
 package client.services.impl;
 
 import client.forms.UserForm;
+import client.forms.UserUpdateForm;
 import client.model.ArticleModel;
 import client.model.UserModel;
 import client.responses.users.UserShowResponse;
@@ -99,7 +100,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(UserForm userForm) throws NotFoundException {
+    public UserUpdateForm updateForm(User user) {
+        return UserUpdateForm.builder()
+                .id(user.id)
+                .name(user.name)
+                .mail(user.mail)
+                .introduction(user.introduction)
+                .imageUrl(user.imageUrl)
+                .build();
+    }
+
+    @Override
+    public void update(UserUpdateForm userForm) throws NotFoundException {
         User user = userRepository.findById(userForm.id)
                 .orElseThrow(() ->new NotFoundException("見つかりませんでした"));
         user.name = userForm.name;
