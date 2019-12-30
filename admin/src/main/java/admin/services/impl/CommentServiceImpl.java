@@ -72,10 +72,21 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentUpdateFormResponse updateForm(Long commentId) {
+    public CommentUpdateForm updateForm(Long commentId) {
+        Comment comment = commentRepository.findById(commentId);
+        return CommentUpdateForm.builder()
+                .id(comment.id)
+                .content(comment.content)
+                .userId(comment.user.id)
+                .articleId(comment.article.id)
+                .build();
+    }
+
+    @Override
+    public CommentUpdateFormResponse updateFormResponse(Long commentId) {
         List<User> userList = userRepository.findAll();
         List<Article> articleList = articleRepository.findAll();
-        Comment comment = commentRepository.findById(commentId);
+
 
         return CommentUpdateFormResponse.builder()
                 .userIdList(userList.stream()
@@ -84,13 +95,6 @@ public class CommentServiceImpl implements CommentService {
                 .articleIdList(articleList.stream()
                         .map(article -> article.id)
                         .collect(Collectors.toList()))
-                .commentUpdateForm(
-                        CommentUpdateForm.builder()
-                                .id(comment.id)
-                                .content(comment.content)
-                                .userId(comment.user.id)
-                                .articleId(comment.article.id)
-                                .build())
                 .build();
     }
 

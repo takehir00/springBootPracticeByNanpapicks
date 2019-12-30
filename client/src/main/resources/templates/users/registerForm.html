@@ -15,7 +15,7 @@
     <div class="login">
         <h1>ユーザー登録</h1>
         <div class="form">
-            <form method="post" action="/user" th:object="${userForm}">
+            <form method="post" th:action="@{'/signUp'}" th:object="${userForm}">
                 <div class="form-group login-form">
                     <label for="name">名前</label>
                     <input class="form-control" type="text" name="name" id="name" />

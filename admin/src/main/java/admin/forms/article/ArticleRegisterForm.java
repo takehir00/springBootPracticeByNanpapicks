@@ -1,14 +1,17 @@
 package admin.forms.article;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Tolerate;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Builder
 @Data
-public class ArticleForm {
-    public Long id;
+public class ArticleRegisterForm {
+    @Tolerate
+    public ArticleRegisterForm(){};
 
     @NotEmpty
     public String url;

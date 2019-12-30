@@ -36,7 +36,7 @@ public interface CommentService {
      * @param commentId
      * @return
      */
-    CommentUpdateFormResponse updateForm(Long commentId);
+    CommentUpdateFormResponse updateFormResponse(Long commentId);
 
     /**
      * 更新
@@ -59,4 +59,6 @@ public interface CommentService {
      * @param commentDeleteForm
      */
     void delete(CommentDeleteForm commentDeleteForm);
+
+    CommentUpdateForm updateForm(Long commentId);
 }

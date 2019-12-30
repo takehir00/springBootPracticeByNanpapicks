@@ -13,19 +13,22 @@
 <div class="admin-content">
     <h1 class="admin-content-title">記事編集フォーム</h1>
     <table>
-        <form method="post" action="/admin/article/update" th:object="${articleForm}">
-            <input type="hidden" name="id" th:value="${article.id}"/>
+        <form method="post" action="/admin/article/update" th:object="${articleUpdateForm}">
+            <input type="hidden" name="id" th:value="*{id}"/>
             <tr>
                 <td><label for="url">遷移先記事URL</label></td>
-                <td><input type="text" name="url" id="url" th:value="${article.url}"/></td>
+                <td><input type="text" name="url" id="url" th:value="*{url}"/></td>
+                <td th:if="${urlError != null}" th:text="${urlError.defaultMessage}"></td>
             </tr>
             <tr>
                 <td><label for="title">タイトル</label></td>
-                <td><input type="text" name="title" id="title" th:value="${article.title}"/></td>
+                <td><input type="text" name="title" id="title" th:value="*{title}"/></td>
+                <td th:if="${titleError != null}" th:text="${titleError.defaultMessage}"></td>
             </tr>
             <tr>
                 <td><label for="imageUrl">画像URL</label></td>
-                <td><input type="text" name="imageUrl" id="imageUrl" th:value="${article.imageUrl}"/></td>
+                <td><input type="text" name="imageUrl" id="imageUrl" th:value="*{imageUrl}"/></td>
+                <td th:if="${imageUrlError != null}" th:text="${imageUrlError.defaultMessage}"></td>
             </tr>
             <tr>
                 <td></td>

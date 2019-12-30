@@ -15,19 +15,22 @@
     <div class="login">
         <h1>ユーザー編集</h1>
         <div class="form">
-            <form method="post" th:action="@{'/user/update'}" th:object="${userForm}">
-                <input type="hidden" name="id" th:value="${user.id}" />
+            <form method="post" th:action="@{'/user/update'}" th:object="${userUpdateForm}">
+                <input type="hidden" name="id" th:value="*{id}" />
                 <div class="form-group login-form">
                     <label for="name">名前</label>
-                    <input class="form-control" type="text" name="name" id="name" th:value="${user.name}" />
+                    <input class="form-control" type="text" name="name" id="name" th:value="*{name}" />
                 </div>
+                <td th:if="${nameError != null}" th:text="${nameError.defaultMessage}"></td>
                 <div class="form-group login-form">
                     <label for="mail">メールアドレス</label>
-                    <input class="form-control" type="mail" name="mail" id="mail" th:value="${user.mail}" />
+                    <input class="form-control" type="mail" name="mail" id="mail" th:value="*{mail}" />
+                    <td th:if="${mailError != null}" th:text="${mailError.defaultMessage}"></td>
                 </div>
                 <div class="form-group login-form">
                     <label for="introduction">自己紹介</label>
-                    <input class="form-control" type="text" name="introduction" id="introduction" th:value="${user.introduction}" />
+                    <input class="form-control" type="text" name="introduction" id="introduction" th:value="*{introduction}" />
+                    <td th:if="${introductionError != null}" th:text="${introductionError.defaultMessage}"></td>
                 </div>
                 <input class="btn btn-primary login-btn" type="submit" value="更新" />
             </form>

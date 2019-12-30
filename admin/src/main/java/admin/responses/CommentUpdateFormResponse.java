@@ -11,5 +11,4 @@ import java.util.List;
 public class CommentUpdateFormResponse {
     public List<Long> userIdList;
     public List<Long> articleIdList;
-    public CommentUpdateForm commentUpdateForm;
 }

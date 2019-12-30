@@ -2,6 +2,8 @@ package admin.services.impl;
 
 
 import admin.forms.article.ArticleForm;
+import admin.forms.article.ArticleRegisterForm;
+import admin.forms.article.ArticleUpdateForm;
 import db.entities.Article;
 import db.repositories.ArticleRepository;
 import admin.services.ArticleService;
@@ -26,7 +28,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void create(ArticleForm articleForm) {
+    public void create(ArticleRegisterForm articleForm) {
         Article article = new Article();
         article.url = articleForm.url;
         article.title = articleForm.title;
@@ -40,7 +42,22 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void update(ArticleForm articleForm) {
+    public ArticleUpdateForm updateForm(Long articleId) {
+        Optional<Article> articleOpt = articleRepository.findById(articleId);
+        if (articleOpt.isPresent()) {
+            Article article = articleOpt.get();
+            return ArticleUpdateForm.builder()
+                    .id(article.id)
+                    .url(article.url)
+                    .title(article.title)
+                    .imageUrl(article.imageUrl)
+                    .build();
+        }
+        return null;
+    }
+
+    @Override
+    public void update(ArticleUpdateForm articleForm) {
         Article article = new Article();
         article.id = articleForm.id;
         article.url = articleForm.url;
@@ -56,4 +73,6 @@ public class ArticleServiceImpl implements ArticleService {
             articleRepository.delete(articleOpt.get());
         });
     }
+
+
 }

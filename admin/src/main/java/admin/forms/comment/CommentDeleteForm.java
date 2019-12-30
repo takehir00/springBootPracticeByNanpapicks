@@ -1,11 +1,9 @@
 package admin.forms.comment;
 
-import db.entities.Article;
-import db.entities.Comment;
-import db.entities.User;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
+
 
 @Builder
 @Data

@@ -1,6 +1,7 @@
 package admin.services.impl;
 
 import admin.forms.user.UserForm;
+import admin.forms.user.UserUpdateForm;
 import db.entities.User;
 import db.repositories.UserRepository;
 import admin.services.UserService;
@@ -44,15 +45,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(UserForm userForm) {
-        User user = new User();
-        user.id = userForm.id;
-        user.name = userForm.name;
-        user.mail = userForm.mail;
-        user.introduction = userForm.introduction;
-        user.imageUrl = userForm.imageUrl;
-        user.password = userForm.password;
-        userRepository.saveAndFlush(user);
+    public void update(UserUpdateForm userForm) {
+        Optional<User> userOpt = userRepository.findById(userForm.id);
+        userOpt.ifPresent(user -> {
+            user.name = userForm.name;
+            user.mail = userForm.mail;
+            user.introduction = userForm.introduction;
+            user.imageUrl = userForm.imageUrl;
+            userRepository.save(user);
+        });
     }
 
     @Override
@@ -61,5 +62,21 @@ public class UserServiceImpl implements UserService {
        userOpt.ifPresent(user -> {
            userRepository.delete(user);
        });
+    }
+
+    @Override
+    public UserUpdateForm updateForm(Long userId) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            return UserUpdateForm.builder()
+                    .id(user.id)
+                    .name(user.name)
+                    .mail(user.mail)
+                    .introduction(user.introduction)
+                    .imageUrl(user.imageUrl)
+                    .build();
+        }
+        return null;
     }
 }

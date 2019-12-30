@@ -13,27 +13,27 @@
 <div class="admin-content">
     <h1 class="admin-content-title">ユーザー編集フォーム</h1>
     <table>
-        <form method="post" action="/admin/user/update" th:object="${userForm}">
-            <input type="hidden" name="id" th:value="${user.id}" />
+        <form method="post" action="/admin/user/update" th:object="${userUpdateForm}">
+            <input type="hidden" name="id" th:value="*{id}" />
             <tr>
                 <td><label for="name">名前</label></td>
-                <td><input type="text" name="name" id="name" th:value="${user.name}" /></td>
+                <td><input type="text" name="name" id="name" th:value="*{name}" /></td>
+                <td th:if="${nameError != null}" th:text="${nameError.defaultMessage}"></td>
             </tr>
             <tr>
                 <td><label for="mail">メールアドレス</label></td>
-                <td><input type="text" name="mail" id="mail" th:value="${user.mail}" /></td>
+                <td><input type="text" name="mail" id="mail" th:value="*{mail}" /></td>
+                <td th:if="${mailError != null}" th:text="${mailError.defaultMessage}"></td>
             </tr>
             <tr>
                 <td><label for="introduction">自己紹介</label></td>
-                <td><input type="text" name="introduction" id="introduction"/></td>
+                <td><input type="text" name="introduction" id="introduction" th:value="*{introduction}"/></td>
+                <td th:if="${introductionError != null}" th:text="${introductionError.defaultMessage}"></td>
             </tr>
             <tr>
                 <td><label for="imageUrl">画像URL</label></td>
-                <td><input type="text" name="imageUrl" id="imageUrl" th:value="${user.imageUrl}"/></td>
-            </tr>
-            <tr>
-                <td><label for="password">パスワード</label></td>
-                <td><input type="text" name="password" id="password" th:value="${user.password}" /></td>
+                <td><input type="text" name="imageUrl" id="imageUrl" th:value="*{imageUrl}"/></td>
+                <td th:if="${imageUrlError != null}" th:text="${imageUrlError.defaultMessage}"></td>
             </tr>
             <tr>
                 <td></td>
