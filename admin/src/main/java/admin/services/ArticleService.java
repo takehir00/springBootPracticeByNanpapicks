@@ -2,6 +2,8 @@ package admin.services;
 
 
 import admin.forms.article.ArticleForm;
+import admin.forms.article.ArticleRegisterForm;
+import admin.forms.article.ArticleUpdateForm;
 import db.entities.Article;
 
 import java.util.List;
@@ -17,8 +19,9 @@ public interface ArticleService {
 
     /**
      * 記事登録
+     * @param articleform
      */
-    public void create(ArticleForm articleform);
+    public void create(ArticleRegisterForm articleform);
 
     /**
      * IDで記事取得
@@ -33,7 +36,7 @@ public interface ArticleService {
      *
      * @param articleForm
      */
-    void update(ArticleForm articleForm);
+    void update(ArticleUpdateForm articleForm);
 
     /**
      * 記事削除
@@ -41,4 +44,12 @@ public interface ArticleService {
      * @param articleForm
      */
     void delete(ArticleForm articleForm);
+
+    /**
+     * 更新フォーム
+     *
+     * @param articleId
+     * @return
+     */
+    ArticleUpdateForm updateForm(Long articleId);
 }
