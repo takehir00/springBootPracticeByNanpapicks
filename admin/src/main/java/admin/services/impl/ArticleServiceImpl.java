@@ -33,19 +33,18 @@ public class ArticleServiceImpl implements ArticleService {
         article.url = articleForm.url;
         article.title = articleForm.title;
         article.imageUrl = articleForm.imageUrl;
-        articleRepository.save(article);
+        articleRepository.create(article);
     }
 
     @Override
-    public Optional<Article> getById(Long id) {
+    public Article getById(Long id) {
         return articleRepository.findById(id);
     }
 
     @Override
     public ArticleUpdateForm updateForm(Long articleId) {
-        Optional<Article> articleOpt = articleRepository.findById(articleId);
-        if (articleOpt.isPresent()) {
-            Article article = articleOpt.get();
+        Article article = articleRepository.findById(articleId);
+        if (article != null) {
             return ArticleUpdateForm.builder()
                     .id(article.id)
                     .url(article.url)
@@ -63,16 +62,13 @@ public class ArticleServiceImpl implements ArticleService {
         article.url = articleForm.url;
         article.title = articleForm.title;
         article.imageUrl = articleForm.imageUrl;
-        articleRepository.saveAndFlush(article);
+        articleRepository.update(article);
     }
 
     @Override
     public void delete(ArticleForm articleForm) {
-        Optional<Article> articleOpt = articleRepository.findById(articleForm.id);
-        articleOpt.ifPresent(article -> {
-            articleRepository.delete(articleOpt.get());
-        });
+        Article article = articleRepository.findById(articleForm.id);
+            articleRepository.delete(article);
     }
-
 
 }

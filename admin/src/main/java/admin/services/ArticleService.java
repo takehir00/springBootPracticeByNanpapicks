@@ -7,7 +7,6 @@ import admin.forms.article.ArticleUpdateForm;
 import db.entities.Article;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ArticleService {
     /**
@@ -29,7 +28,7 @@ public interface ArticleService {
      * @param id
      * @return
      */
-    Optional<db.entities.Article> getById(Long id);
+    Article getById(Long id);
 
     /**
      * 記事更新

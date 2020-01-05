@@ -135,10 +135,10 @@ public class ArticleController {
     @RequestMapping(value = "/admin/article/destroy/{id}", method = RequestMethod.GET)
     public ModelAndView destroy(ModelAndView mav,
                                    @PathVariable Long id) {
-        Optional<Article> article = articleService.getById(id);
-        if (article.isPresent()) {
+        Article article = articleService.getById(id);
+        if (article != null) {
             mav.setViewName("articles/deleteForm");
-            mav.addObject("article", article.get());
+            mav.addObject("article", article);
             return mav;
         } else {
             String flash = "該当の記事はありません";
