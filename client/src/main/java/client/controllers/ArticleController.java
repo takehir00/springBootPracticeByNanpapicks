@@ -1,6 +1,8 @@
 package client.controllers;
 
 import client.responses.articles.ArticleDetailResponse;
+import client.responses.articles.ArticleIndexResponse;
+import client.util.PageUtil;
 import db.daos.impl.UserDaoImpl;
 import db.entities.Article;
 import client.services.ArticleService;
@@ -12,10 +14,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -33,10 +37,16 @@ public class ArticleController extends HomeController {
      * @return 記事一覧画面
      */
     @GetMapping(value = "/")
-    public ModelAndView index(ModelAndView mav) {
+    public ModelAndView index(ModelAndView mav, @RequestParam int page) {
+        int limit = 15;
+        int offset = PageUtil.calculatePageOffset(page, limit);
+
         mav.addObject("user", getUser());
+
         mav.setViewName("articles/index");
-        mav.addObject("articles", articleService.getAll());
+        mav.addObject(
+                "articleIndexResponse",
+                articleService.listing(offset, limit));
         return mav;
     }
 
