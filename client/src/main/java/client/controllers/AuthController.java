@@ -39,7 +39,7 @@ public class AuthController {
      */
     @PostMapping("success")
     public String loginSuccess() {
-        return "redirect:/";
+        return "redirect:/?page=1";
     }
 
     /**

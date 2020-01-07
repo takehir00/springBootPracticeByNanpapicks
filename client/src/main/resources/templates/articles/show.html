@@ -29,7 +29,7 @@
                 <form method="post" th:action="@{'/comment/create'}" th:object="${commentCreateForm}" class="row">
                     <input type="hidden" name="articleId" th:value="${response.articleModel.id}">
                     <div class="form-group col-sm-10">
-                        <textarea placeholder="コメントする" class="form-control" name="comment"></textarea>
+                        <textarea placeholder="コメントする" class="form-control" name="content" th:value="*{content}"></textarea>
                     </div>
                     <input class="btn btn-primary col-sm-2" type="submit" value="投稿する" />
                 </form>

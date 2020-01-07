@@ -4,6 +4,8 @@ import client.model.ArticleModel;
 import client.model.CommentModel;
 import client.model.UserModel;
 import client.responses.articles.ArticleDetailResponse;
+import client.responses.articles.ArticleIndexResponse;
+import client.util.PageUtil;
 import db.entities.Article;
 import client.services.ArticleService;
 import db.repositories.ArticleRepository;
@@ -13,7 +15,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,16 +31,27 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Optional<Article> getById(Long id) {
-        Optional<Article> article = articleRepository.findById(id);
+    public ArticleIndexResponse listing(int offset, int limit) {
+        ArticleIndexResponse response =
+                ArticleIndexResponse.builder()
+                        .articleList(
+                                articleRepository.findByOffsetAndLimit(offset, limit))
+                        .pageCount(PageUtil
+                                .calculatePageCount(articleRepository.countAll(), limit))
+                        .build();
+        return response;
+    }
+
+    @Override
+    public Article getById(Long id) {
+        Article article = articleRepository.findById(id);
         return article;
     }
 
     @Override
     public ArticleDetailResponse detail(Long articleId) {
-        Optional<Article> articleOpt = articleRepository.findById(articleId);
-        if (articleOpt.isPresent()) {
-            Article article = articleOpt.get();
+        Article article = articleRepository.findById(articleId);
+        if (article != null) {
             return ArticleDetailResponse.builder()
                     .articleModel(ArticleModel.builder()
                             .id(article.id)

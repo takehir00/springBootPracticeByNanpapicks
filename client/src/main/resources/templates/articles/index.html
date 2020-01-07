@@ -12,13 +12,17 @@
     <div th:insert="~{header :: copy}"></div>
     <div class="contents container">
         <div class="articles row">
-            <div class="article col-sm-3" th:each="article : ${articles}">
+            <div class="article col-sm-3" th:each="article : ${articleIndexResponse.articleList}">
                 <img class="article-image col-sm-12" th:src="${article.imageUrl}" th:height="100" th:width="100"/>
                 <a class="article-title col-sm-12" th:text="${article.title}" href="articles/show.html" th:href="@{/article/{articleId}(articleId=${article.id})}"></a>
             </div>
         </div>
         <div class="articles-pagination">
-            ページネーション
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:each="i : ${#numbers.sequence(1, articleIndexResponse.pageCount)}">
+                    <a class="page-link" th:href=@{/?page={i}(i=${i})} th:text="${i}"></a>
+                </li>
+            </ul>
         </div>
     </div>
     <div th:insert="~{footer :: copy}"></div>

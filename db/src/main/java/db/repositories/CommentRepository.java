@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Component
@@ -23,6 +24,21 @@ public class CommentRepository {
         return entityManager.createQuery(
                 "select comment from Comment comment", Comment.class)
                 .getResultList();
+    }
+
+    public int countAll() {
+        List<Comment> commentList = entityManager.createQuery(
+                "select comment from Comment comment", Comment.class)
+                .getResultList();
+        return commentList.size();
+    }
+
+    public List<Comment> findByOffsetAndLimit(int offset, int limit) {
+        TypedQuery<Comment> query = entityManager
+                .createQuery("select comment from Comment comment ORDER BY comment.createdAt DESC", Comment.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit);
+        return query.getResultList();
     }
 
     public void create(Comment entity) {
