@@ -1,5 +1,6 @@
 package client.controllers;
 
+import client.forms.CommentCreateForm;
 import client.responses.articles.ArticleDetailResponse;
 import client.responses.articles.ArticleIndexResponse;
 import client.util.PageUtil;
@@ -68,6 +69,8 @@ public class ArticleController extends HomeController {
             return mav;
         }
         mav.setViewName("articles/show");
+        mav.addObject("commentCreateForm",
+                CommentCreateForm.builder().build());
         mav.addObject("response", response);
         return mav;
     }
