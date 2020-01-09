@@ -4,6 +4,7 @@ package admin.services.impl;
 import admin.forms.article.ArticleForm;
 import admin.forms.article.ArticleRegisterForm;
 import admin.forms.article.ArticleUpdateForm;
+import admin.util.PageUtil;
 import db.entities.Article;
 import db.repositories.ArticleRepository;
 import admin.services.ArticleService;
@@ -25,6 +26,11 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> getAll() {
         return articleRepository.findAll();
+    }
+
+    @Override
+    public List<Article> getByOffsetAndLimit(int offset, int limit) {
+        return articleRepository.findByOffsetAndLimit(offset, limit);
     }
 
     @Override
@@ -53,6 +59,11 @@ public class ArticleServiceImpl implements ArticleService {
                     .build();
         }
         return null;
+    }
+
+    @Override
+    public int getPageCount(int limit) {
+        return PageUtil.calculatePageCount(articleRepository.countAll(), limit);
     }
 
     @Override

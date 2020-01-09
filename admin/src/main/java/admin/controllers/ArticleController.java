@@ -4,6 +4,7 @@ package admin.controllers;
 import admin.forms.article.ArticleForm;
 import admin.forms.article.ArticleRegisterForm;
 import admin.forms.article.ArticleUpdateForm;
+import admin.util.PageUtil;
 import db.entities.Article;
 import admin.services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,8 +33,8 @@ public class ArticleController {
      */
     @Transactional
     @RequestMapping(value = "/admin/article", method = RequestMethod.GET)
-    public ModelAndView top(ModelAndView mav) {
-        mav = setArticleTopModelAndView(null);
+    public ModelAndView top(ModelAndView mav, @RequestParam int page) {
+        mav = setArticleTopModelAndView(null, page);
         return mav;
     }
 
@@ -94,8 +92,9 @@ public class ArticleController {
             mav.addObject("articleUpdateForm", form);
             return mav;
         } else {
+            int page = 0;
             String flash = "該当の記事はありません";
-            mav = setArticleTopModelAndView(flash);
+            mav = setArticleTopModelAndView(flash, page);
             return mav;
         }
     }
@@ -135,6 +134,7 @@ public class ArticleController {
     @RequestMapping(value = "/admin/article/destroy/{id}", method = RequestMethod.GET)
     public ModelAndView destroy(ModelAndView mav,
                                    @PathVariable Long id) {
+
         Article article = articleService.getById(id);
         if (article != null) {
             mav.setViewName("articles/deleteForm");
@@ -142,7 +142,8 @@ public class ArticleController {
             return mav;
         } else {
             String flash = "該当の記事はありません";
-            mav = setArticleTopModelAndView(flash);
+            int page = 0;
+            mav = setArticleTopModelAndView(flash, page);
             return mav;
         }
     }
@@ -164,11 +165,16 @@ public class ArticleController {
      *
      * @return
      */
-    private ModelAndView setArticleTopModelAndView(String flash) {
+    private ModelAndView setArticleTopModelAndView(String flash, int page) {
+        int limit = 15;
+        int offset = PageUtil.calculatePageOffset(page, limit);
+
         ModelAndView mav = new ModelAndView();
         mav.setViewName("articles/top");
         List<Article> articles = articleService.getAll();
-        mav.addObject("articles", articles);
+        mav.addObject("articles",
+                articleService.getByOffsetAndLimit(offset, limit));
+        mav.addObject("pageCount", articleService.getPageCount(limit));
         mav.addObject("flash",flash);
         return mav;
     }
