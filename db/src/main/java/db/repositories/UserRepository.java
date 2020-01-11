@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,8 +26,15 @@ public class UserRepository {
 
     public List<User> findAll() {
         return entityManager.createQuery(
-                "select article from Article article", User.class)
+                "select user from User user", User.class)
                 .getResultList();
+    }
+
+    public int countAll() {
+        List<User> articleList = entityManager.createQuery(
+                "select user from User user", User.class)
+                .getResultList();
+        return articleList.size();
     }
 
     public void create(User entity) {
@@ -37,5 +45,14 @@ public class UserRepository {
 
     public void delete(User entity) {
         entityManager.remove(entity);
+    }
+
+    public List<User> findByOffsetAndLimit(int offset, int limit) {
+        TypedQuery<User> query = entityManager
+                .createQuery(
+                        "select user from User user ORDER BY user.id DESC", User.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit);
+        return query.getResultList();
     }
 }

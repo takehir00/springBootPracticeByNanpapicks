@@ -2,6 +2,7 @@ package admin.controllers;
 
 import admin.forms.user.UserForm;
 import admin.forms.user.UserUpdateForm;
+import admin.util.PageUtil;
 import db.entities.User;
 import admin.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -34,10 +32,15 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/admin/user", method = RequestMethod.GET)
-    public ModelAndView top(ModelAndView mav) {
+    public ModelAndView top(ModelAndView mav, @RequestParam int page) {
+        int limit = 15;
+        int offset = PageUtil.calculatePageOffset(page, limit);
+
         mav.setViewName("users/top");
-        List<User> users = userService.getAll();
-        mav.addObject("users", users);
+        mav.addObject("users",
+                userService.getByOffsetAndLimit(offset, limit));
+        mav.addObject("pageCount",
+                userService.getPageCount(limit));
         return mav;
     }
 
@@ -144,10 +147,10 @@ public class UserController {
     @RequestMapping(value = "/admin/user/destroy/{userId}")
     public ModelAndView destroy(ModelAndView mav,
                                 @PathVariable Long userId) {
-        User user = userService.getById(userId);
-        if (user != null) {
+        Optional<User> userOpt = userService.getById(userId);
+        if (userOpt.isPresent()) {
             mav.setViewName("/users/deleteForm");
-            mav.addObject("user", user);
+            mav.addObject("user", userOpt.get());
             return mav;
         } else {
             String flash = "該当のユーザーはありません";

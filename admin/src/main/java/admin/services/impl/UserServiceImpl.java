@@ -2,6 +2,7 @@ package admin.services.impl;
 
 import admin.forms.user.UserForm;
 import admin.forms.user.UserUpdateForm;
+import admin.util.PageUtil;
 import db.entities.User;
 import db.repositories.UserRepository;
 import admin.services.UserService;
@@ -41,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getByOffsetAndLimit(int offset, int limit) {
-        return null;
+        return userRepository.findByOffsetAndLimit(offset, limit);
     }
 
     @Override
@@ -83,5 +84,10 @@ public class UserServiceImpl implements UserService {
                     .build();
         }
         return null;
+    }
+
+    @Override
+    public int getPageCount(int limit) {
+        return PageUtil.calculatePageCount(userRepository.countAll(), limit);
     }
 }

@@ -60,4 +60,11 @@ public interface UserService {
      * @return
      */
     UserUpdateForm updateForm(Long userId);
+
+    /**
+     * 総ページ数を取得する
+     *
+     * @return
+     */
+    int getPageCount(int limit);
 }
