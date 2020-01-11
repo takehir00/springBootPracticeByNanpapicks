@@ -14,7 +14,7 @@
     <a class="logo">NANPA PICKS</a>
 </header>
 
-<div class="contents">
+<div class="contents container">
     <div class="login">
         <h1>ログイン</h1>
         <div class="form">
@@ -31,6 +31,7 @@
             </form>
         </div>
     </div>
+    <a href="users/editForm.html" th:href="@{/user/registerForm}">アカウントがない場合はこちらからアカウント登録</a>
 </div>
 
 <div th:insert="~{footer :: copy}"></div>
