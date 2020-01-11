@@ -9,6 +9,7 @@ import admin.responses.CommentRegisterFormResponse;
 import admin.responses.CommentTopResponse;
 import admin.responses.CommentUpdateFormResponse;
 import admin.services.CommentService;
+import admin.util.PageUtil;
 import db.entities.Article;
 import db.entities.Comment;
 import db.entities.User;
@@ -39,14 +40,15 @@ public class CommentServiceImpl implements CommentService {
     ArticleRepository articleRepository;
 
     @Override
-    public CommentTopResponse listing() {
-        List<Comment> commentEntityList = commentRepository.findAll();
+    public CommentTopResponse listing(int offset, int limit) {
+        List<Comment> commentEntityList = commentRepository.findByOffsetAndLimit(offset, limit);
 
         return CommentTopResponse.builder()
                 .commentList(
                         commentEntityList.stream()
                                 .map(CommentReadModel::convertToCommentReadModel)
                                 .collect(Collectors.toList()))
+                .pageCount(PageUtil.calculatePageCount(commentRepository.countAll(), limit))
                 .build();
     }
 

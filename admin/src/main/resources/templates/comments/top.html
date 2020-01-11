@@ -8,7 +8,7 @@
     <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
 </head>
 <body>
-<div class="flash" th:if="${articleResponse.flash != null}" th:text="${articleResponse.flash}"></div>
+<div class="flash" th:if="${commentResponse.flash != null}" th:text="${commentResponse.flash}"></div>
 <div th:insert="~{header :: copy}"></div>
 <div th:insert="~{nav :: copy}"></div>
 <div class="admin-content">
@@ -21,7 +21,7 @@
             <th> </th>
             <th> </th>
         </tr>
-        <tr th:each="comment : ${articleResponse.commentList}">
+        <tr th:each="comment : ${commentResponse.commentList}">
             <td th:text="${comment.id}"></td>
             <td th:text="${comment.content != null}? ${comment.content} : '本文がありません'"></td>
             <td th:text="${comment.userId != null}? ${comment.userId} : '紐づくユーザーが見つかりません'"></td>
@@ -34,13 +34,11 @@
             </td>
         </tr>
     </table>
-    <div>
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    <div class="articles-pagination">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:each="i : ${#numbers.sequence(1, commentResponse.pageCount)}">
+                <a class="page-link" th:href=@{/admin/comment?page={i}(i=${i})} th:text="${i}"></a>
+            </li>
         </ul>
     </div>
 </div>
