@@ -7,6 +7,7 @@ import admin.responses.CommentDeleteFormResponse;
 import admin.responses.CommentRegisterFormResponse;
 import admin.responses.CommentUpdateFormResponse;
 import admin.services.CommentService;
+import admin.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,8 +30,11 @@ public class CommentController {
      * @return
      */
     @GetMapping(value = "/admin/comment")
-    public ModelAndView top(ModelAndView mav) {
-        mav.addObject("articleResponse", commentService.listing());
+    public ModelAndView top(ModelAndView mav, @RequestParam int page) {
+        int limit = 15;
+        int offset = PageUtil.calculatePageOffset(page, limit);
+
+        mav.addObject("commentResponse", commentService.listing(offset, limit));
         mav.setViewName("comments/top");
         return mav;
     }

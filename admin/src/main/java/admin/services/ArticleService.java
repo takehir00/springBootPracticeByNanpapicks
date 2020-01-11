@@ -17,6 +17,13 @@ public interface ArticleService {
     public List<Article> getAll();
 
     /**
+     * 記事をoffsetとlimitを指定して取得
+     *
+     * @return
+     */
+    public List<Article> getByOffsetAndLimit(int offset, int limit);
+
+    /**
      * 記事登録
      * @param articleform
      */
@@ -51,4 +58,11 @@ public interface ArticleService {
      * @return
      */
     ArticleUpdateForm updateForm(Long articleId);
+
+    /**
+     * 総ページ数を取得する
+     *
+     * @return
+     */
+    int getPageCount(int limit);
 }

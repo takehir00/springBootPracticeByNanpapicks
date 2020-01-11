@@ -20,7 +20,16 @@ public interface UserService {
      *
      * @return ユーザー一覧
      */
-    List<db.entities.User> getAll();
+    List<User> getAll();
+
+    /**
+     * ユーザーをoffsetとlimitを指定して取得
+     *
+     * @param offset
+     * @param limit
+     * @return
+     */
+    List<User> getByOffsetAndLimit(int offset, int limit);
 
     /**
      * IDでユーザー取得
@@ -51,4 +60,11 @@ public interface UserService {
      * @return
      */
     UserUpdateForm updateForm(Long userId);
+
+    /**
+     * 総ページ数を取得する
+     *
+     * @return
+     */
+    int getPageCount(int limit);
 }

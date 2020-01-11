@@ -35,7 +35,7 @@ public class CommentRepository {
 
     public List<Comment> findByOffsetAndLimit(int offset, int limit) {
         TypedQuery<Comment> query = entityManager
-                .createQuery("select comment from Comment comment ORDER BY comment.createdAt DESC", Comment.class)
+                .createQuery("select comment from Comment comment ORDER BY comment.id DESC", Comment.class)
                 .setFirstResult(offset)
                 .setMaxResults(limit);
         return query.getResultList();

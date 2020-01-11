@@ -2,6 +2,7 @@ package admin.services.impl;
 
 import admin.forms.user.UserForm;
 import admin.forms.user.UserUpdateForm;
+import admin.util.PageUtil;
 import db.entities.User;
 import db.repositories.UserRepository;
 import admin.services.UserService;
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
         user.imageUrl = userForm.imageUrl;
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.password = encoder.encode(userForm.password);
-        userRepository.save(user);
+        userRepository.create(user);
     }
 
     @Override
@@ -40,7 +41,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<db.entities.User> getById(Long id) {
+    public List<User> getByOffsetAndLimit(int offset, int limit) {
+        return userRepository.findByOffsetAndLimit(offset, limit);
+    }
+
+    @Override
+    public Optional<User> getById(Long id) {
         return userRepository.findById(id);
     }
 
@@ -52,7 +58,7 @@ public class UserServiceImpl implements UserService {
             user.mail = userForm.mail;
             user.introduction = userForm.introduction;
             user.imageUrl = userForm.imageUrl;
-            userRepository.save(user);
+            userRepository.update(user);
         });
     }
 
@@ -78,5 +84,10 @@ public class UserServiceImpl implements UserService {
                     .build();
         }
         return null;
+    }
+
+    @Override
+    public int getPageCount(int limit) {
+        return PageUtil.calculatePageCount(userRepository.countAll(), limit);
     }
 }

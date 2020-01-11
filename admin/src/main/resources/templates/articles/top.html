@@ -12,28 +12,35 @@
     <div th:insert="~{header :: copy}"></div>
     <div th:insert="~{nav :: copy}"></div>
     <div class="admin-content">
-    <table>
-        <tr>
-            <th> </th>
-            <th> </th>
-            <th>id</th>
-            <th>url</th>
-            <th>title</th>
-            <th>src</th>
-        </tr>
-        <tr th:each="article : ${articles}">
-            <td>
-                <a href="articles/editForm.html" th:href="@{/admin/article/edit/{articleId}(articleId=${article.id})}">編集</a>
-            </td>
-            <td>
-                <a href="articles/deleteForm.html" th:href="@{/admin/article/destroy/{articleId}(articleId=${article.id})}">削除</a>
-            </td>
-            <td th:text="${article.id}"></td>
-            <td th:text="${article.url != null}? ${article.url} : 'URLがありません'"></td>
-            <td th:text="${article.title != null}? ${article.title} : 'タイトルがありません'"></td>
-            <td th:text="${article.imageUrl != null}? ${article.imageUrl} : '画像URLがありません'"></td>
-        </tr>
-    </table>
+        <table>
+            <tr>
+                <th> </th>
+                <th> </th>
+                <th>id</th>
+                <th>url</th>
+                <th>title</th>
+                <th>src</th>
+            </tr>
+            <tr th:each="article : ${articles}">
+                <td>
+                    <a href="articles/editForm.html" th:href="@{/admin/article/edit/{articleId}(articleId=${article.id})}">編集</a>
+                </td>
+                <td>
+                    <a href="articles/deleteForm.html" th:href="@{/admin/article/destroy/{articleId}(articleId=${article.id})}">削除</a>
+                </td>
+                <td th:text="${article.id}"></td>
+                <td th:text="${article.url != null}? ${article.url} : 'URLがありません'"></td>
+                <td th:text="${article.title != null}? ${article.title} : 'タイトルがありません'"></td>
+                <td th:text="${article.imageUrl != null}? ${article.imageUrl} : '画像URLがありません'"></td>
+            </tr>
+        </table>
+        <div class="articles-pagination">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:each="i : ${#numbers.sequence(1, pageCount)}">
+                    <a class="page-link" th:href=@{/admin/article?page={i}(i=${i})} th:text="${i}"></a>
+                </li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>

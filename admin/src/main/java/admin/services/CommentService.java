@@ -13,8 +13,10 @@ public interface CommentService {
      * 一覧
      *
      * @return
+     * @param page
+     * @param limit
      */
-    CommentTopResponse listing();
+    CommentTopResponse listing(int offset, int limit);
 
     /**
      * 登録フォーム
