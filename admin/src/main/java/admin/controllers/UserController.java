@@ -144,10 +144,10 @@ public class UserController {
     @RequestMapping(value = "/admin/user/destroy/{userId}")
     public ModelAndView destroy(ModelAndView mav,
                                 @PathVariable Long userId) {
-        Optional<User> userOpt = userService.getById(userId);
-        if (userOpt.isPresent()) {
+        User user = userService.getById(userId);
+        if (user != null) {
             mav.setViewName("/users/deleteForm");
-            mav.addObject("user", userOpt.get());
+            mav.addObject("user", user);
             return mav;
         } else {
             String flash = "該当のユーザーはありません";

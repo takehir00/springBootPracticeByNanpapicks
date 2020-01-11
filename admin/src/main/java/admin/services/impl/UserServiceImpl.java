@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         user.imageUrl = userForm.imageUrl;
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.password = encoder.encode(userForm.password);
-        userRepository.save(user);
+        userRepository.create(user);
     }
 
     @Override
@@ -40,7 +40,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<db.entities.User> getById(Long id) {
+    public List<User> getByOffsetAndLimit(int offset, int limit) {
+        return null;
+    }
+
+    @Override
+    public Optional<User> getById(Long id) {
         return userRepository.findById(id);
     }
 
@@ -52,7 +57,7 @@ public class UserServiceImpl implements UserService {
             user.mail = userForm.mail;
             user.introduction = userForm.introduction;
             user.imageUrl = userForm.imageUrl;
-            userRepository.save(user);
+            userRepository.update(user);
         });
     }
 

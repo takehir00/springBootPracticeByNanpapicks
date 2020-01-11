@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
         user.introduction = userForm.introduction;
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.password = encoder.encode(userForm.password);
-        userRepository.save(user);
+        userRepository.create(user);
     }
 
     @Override
@@ -118,6 +118,6 @@ public class UserServiceImpl implements UserService {
         user.mail = userForm.mail;
         user.imageUrl = userForm.imageUrl;
         user.introduction = userForm.introduction;
-        userRepository.saveAndFlush(user);
+        userRepository.update(user);
     }
 }
