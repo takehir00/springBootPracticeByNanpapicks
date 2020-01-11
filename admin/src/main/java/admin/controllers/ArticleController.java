@@ -171,7 +171,6 @@ public class ArticleController {
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("articles/top");
-        List<Article> articles = articleService.getAll();
         mav.addObject("articles",
                 articleService.getByOffsetAndLimit(offset, limit));
         mav.addObject("pageCount", articleService.getPageCount(limit));

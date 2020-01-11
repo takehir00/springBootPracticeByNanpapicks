@@ -68,8 +68,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void update(ArticleUpdateForm articleForm) {
-        Article article = new Article();
-        article.id = articleForm.id;
+        Article article = articleRepository.findById(articleForm.id);
         article.url = articleForm.url;
         article.title = articleForm.title;
         article.imageUrl = articleForm.imageUrl;
@@ -79,7 +78,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public void delete(ArticleForm articleForm) {
         Article article = articleRepository.findById(articleForm.id);
-            articleRepository.delete(article);
+        articleRepository.delete(article);
     }
 
 }
