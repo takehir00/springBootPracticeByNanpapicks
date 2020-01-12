@@ -52,8 +52,8 @@
 
 .comment-form {
   padding-top: 2vh;
-  // padding-left: 8vw;
-  // width: 50vw;
+  width: 40vw;
+  margin: 0vh auto;
 }
 
 .comments {
@@ -69,6 +69,3 @@
   border-bottom: dotted 1px;
 }
 
-.btn {
-  // padding:1px 0px;
-}

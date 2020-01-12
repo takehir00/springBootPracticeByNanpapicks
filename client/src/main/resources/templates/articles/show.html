@@ -24,14 +24,18 @@
                 </div>
             </div>
         </div>
-        <div class="comment-form">
+        <div class="comment-form pb-2">
             <div class="form">
-                <form method="post" th:action="@{'/comment/create'}" th:object="${commentCreateForm}" class="row">
+                <form method="post" th:action="@{'/comment/create'}" th:object="${commentCreateForm}">
                     <input type="hidden" name="articleId" th:value="${response.articleModel.id}">
-                    <div class="form-group col-sm-10">
-                        <textarea placeholder="コメントする" class="form-control" name="content" th:value="*{content}"></textarea>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <textarea placeholder="コメントする" class="form-control" name="content" th:value="*{content}"></textarea>
+                        </div>
                     </div>
-                    <input class="btn btn-primary col-sm-2" type="submit" value="投稿する" />
+                    <div class="row">
+                        <input class="btn btn-primary col-sm-2 offset-sm-10" type="submit" value="投稿する" />
+                    </div>
                 </form>
                 <div th:if="${contentError != null}" th:text="${contentError.defaultMessage}"></div>
             </div>
