@@ -90,6 +90,7 @@ header {
 .contents {
   background-color: #EFEFEF;
   padding-top: 10vh;
+  padding-bottom: 5vh;
   min-height: 79vh;
 }
 
