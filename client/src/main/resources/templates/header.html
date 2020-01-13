@@ -9,26 +9,14 @@
     <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
 </head>
 <body>
-    <header class="container-fluid py-2" th:fragment="copy">
+    <header class="navbar bg-dark navbar-dark" th:fragment="copy">
         <div class="row" th:if="${flash != null}">
             <div class="flash col-sm-12" th:text="${flash}"></div>
         </div>
-        <div class="row">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4 text-center">
-                <a class="logo">NANPA PICKS</a>
-            </div>
-            <div class="col-sm-4">
-                <div class="row">
-                    <div class="col-sm-6"></div>
-                    <div class="col-sm-5">
-                        <a class="btn btn-primary btn-sm p-1 m-1" th:if="${user != null}" th:href="@{/user/{userId}(userId=${user.id})}" th:text="${user.name}"></a>
-                        <a class="btn btn-primary btn-sm p-1 m-1" th:if="${user != null}" th:href="@{/logout}">ログアウト</a>
-                    </div>
-                    <div class="col-sm-1"></div>
-                </div>
-
-            </div>
+        <a th:href="@{/?page=1}" class="text-light navbar-brand">NANPA PICKS</a>
+        <div class="my-2 my-lg-0">
+            <a class="px-1" th:if="${user != null}" th:href="@{/user/{userId}(userId=${user.id})}" th:text="${user.name}"></a>
+            <a class="px-1" th:if="${user != null}" th:href="@{/logout}">ログアウト</a>
         </div>
     </header>
 </body>
