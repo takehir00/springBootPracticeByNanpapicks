@@ -9,12 +9,14 @@
     <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" />
 </head>
 <body>
-    <header th:fragment="copy">
-        <div class="flash" th:if="${flash != null}" th:text="${flash}"></div>
-        <a class="logo">NANPA PICKS</a>
-        <div class="header-menu">
-            <a class="btn btn-primary" th:if="${user != null}" th:href="@{/user/{userId}(userId=${user.id})}" th:text="${user.name}"></a>
-            <a class="btn btn-primary" th:if="${user != null}" th:href="@{/logout}">ログアウト</a>
+    <header class="navbar bg-dark navbar-dark" th:fragment="copy">
+        <div class="row" th:if="${flash != null}">
+            <div class="flash col-sm-12" th:text="${flash}"></div>
+        </div>
+        <a th:href="@{/?page=1}" class="text-light navbar-brand">NANPA PICKS</a>
+        <div class="my-2 my-lg-0">
+            <a class="px-1" th:if="${user != null}" th:href="@{/user/{userId}(userId=${user.id})}" th:text="${user.name}"></a>
+            <a class="px-1" th:if="${user != null}" th:href="@{/logout}">ログアウト</a>
         </div>
     </header>
 </body>

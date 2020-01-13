@@ -70,26 +70,17 @@ table {
   border-spacing: 0;
 }
 
-header {
-  border: solid 1px #999;
-  height: 6vh;
-  position: relative;
-  background-color: #E0FFFF;
-}
-
 .header-menu {
   float: right;
   margin-top: 1vh;
   margin-right: 1vw;
 }
 
-.contents-container {
-  position: relative;
-}
 
 .contents {
   background-color: #EFEFEF;
   padding-top: 10vh;
+  padding-bottom: 5vh;
   min-height: 79vh;
 }
 
@@ -98,16 +89,9 @@ footer {
   color: #999;
   height: 15vh;
   width: 100vw;
-  // position: absolute;
-  // bottom: 0;
 }
 
 .logo {
   height: 4vh;
-  width: 10vw;
-  position: absolute;
-  top: 1vh;
-  left: 45vw;
-  color: ;
   font-family: 'Impact';
 }

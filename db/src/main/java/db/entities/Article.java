@@ -19,6 +19,7 @@ public class Article {
     @Column
     public String imageUrl;
 
+    @OrderBy("id DESC")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "article")
     @Column(nullable = true)
     public List<Comment> commentList;

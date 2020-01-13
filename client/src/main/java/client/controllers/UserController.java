@@ -87,6 +87,7 @@ public class UserController extends HomeController {
             mav.addObject("articles", articleService.getAll());
             return mav;
         }
+        mav.addObject("user", getUser());
         mav.setViewName("users/show");
         mav.addObject("response",userService.show(userOpt.get()));
         return mav;
@@ -121,7 +122,7 @@ public class UserController extends HomeController {
         }
 
         UserUpdateForm form = userService.updateForm(userOpt.get());
-
+        mav.addObject("user", getUser());
         mav.addObject("userUpdateForm", form);
         mav.setViewName("users/editForm");
         return mav;
