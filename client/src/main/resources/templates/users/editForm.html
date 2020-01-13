@@ -11,7 +11,7 @@
 <body>
 <div th:insert="~{header :: copy}"></div>
 
-<div class="contents">
+<div class="contents container">
     <div class="login">
         <h1>ユーザー編集</h1>
         <div class="form">
@@ -32,7 +32,7 @@
                     <input class="form-control" type="text" name="introduction" id="introduction" th:value="*{introduction}" />
                     <td th:if="${introductionError != null}" th:text="${introductionError.defaultMessage}"></td>
                 </div>
-                <input class="btn btn-primary login-btn" type="submit" value="更新" />
+                <input class="btn btn-dark login-btn" type="submit" value="更新" />
             </form>
         </div>
     </div>
