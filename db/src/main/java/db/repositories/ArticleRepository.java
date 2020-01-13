@@ -5,6 +5,7 @@ import db.entities.Article;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -15,10 +16,14 @@ public class ArticleRepository {
     EntityManager entityManager;
 
     public Article findById(Long articleId) {
-        return entityManager.createQuery(
-                "select article from Article article where article.id = :articleId", Article.class)
-                .setParameter("articleId", articleId)
-                .getSingleResult();
+        try {
+            return entityManager.createQuery(
+                    "select article from Article article where article.id = :articleId", Article.class)
+                    .setParameter("articleId", articleId)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     public List<Article> findAll() {
