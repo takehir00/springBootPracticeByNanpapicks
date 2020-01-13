@@ -5,6 +5,7 @@ import client.forms.UserUpdateForm;
 import client.responses.users.UserShowResponse;
 import client.services.ArticleService;
 import client.services.UserService;
+import client.util.PageUtil;
 import db.entities.User;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class UserController extends HomeController {
     @PersistenceContext
     EntityManager entityManager;
 
+    /** 記事一覧画面で取得するデータの上限数 */
+    private int limit = 15;
+
     /**
      * 登録画面
      *
@@ -59,7 +63,7 @@ public class UserController extends HomeController {
     @PostMapping(value = "signUp")
     public String create(@ModelAttribute("userForm")UserForm userForm) {
         userService.create(userForm);
-        return "redirect:/";
+        return "redirect:/?page=0";
     }
 
     /**
@@ -74,21 +78,18 @@ public class UserController extends HomeController {
                              @PathVariable Long userId) {
         Optional<User> userOpt = userService.getByMail(getMail());
         if (!userOpt.isPresent()) {
+            int page = 0;
+            int offset = PageUtil.calculatePageOffset(page, limit);
+
             mav.setViewName("articles/index");
             String flash = "あなたのアカウントは削除されています";
             mav.addObject("flash", flash);
-            mav.addObject("articles", articleService.getAll());
+            mav.addObject(
+                    "articleIndexResponse",
+                    articleService.listing(offset, limit));
             return mav;
         }
-
-        if (!userOpt.get().id.equals(userId)) {
-            mav.addObject("user", userOpt.get());
-            mav.setViewName("articles/index");
-            String flash = "指定したユーザーにアクセスする権限はありません";
-            mav.addObject("flash", flash);
-            mav.addObject("articles", articleService.getAll());
-            return mav;
-        }
+        
         mav.addObject("user", getUser());
         mav.setViewName("users/show");
         mav.addObject("response",userService.show(userOpt.get()));
@@ -107,19 +108,29 @@ public class UserController extends HomeController {
                              @PathVariable Long userId) {
         Optional<User> userOpt = userService.getByMail(getMail());
         if (!userOpt.isPresent()) {
+            int page = 0;
+            int offset = PageUtil.calculatePageOffset(page, limit);
+
             mav.setViewName("articles/index");
             String flash = "あなたのアカウントは削除されています";
             mav.addObject("flash", flash);
-            mav.addObject("articles", articleService.getAll());
+            mav.addObject(
+                    "articleIndexResponse",
+                    articleService.listing(offset, limit));
             return mav;
         }
 
         if (!userOpt.get().id.equals(userId)) {
+            int page = 0;
+            int offset = PageUtil.calculatePageOffset(page, limit);
+
             mav.addObject("user", userOpt.get());
             mav.setViewName("articles/index");
             String flash = "指定したユーザーにアクセスする権限はありません";
             mav.addObject("flash", flash);
-            mav.addObject("articles", articleService.getAll());
+            mav.addObject(
+                    "articleIndexResponse",
+                    articleService.listing(offset, limit));
             return mav;
         }
 
@@ -147,7 +158,7 @@ public class UserController extends HomeController {
             String flash = "あなたのアカウントは削除されています";
             redirectAttributes.addAttribute("flash", flash);
             redirectAttributes.addAttribute("articles", articleService.getAll());
-            return "redirect:/";
+            return "redirect:/?page=0";
         }
 
         if (!userOpt.get().id.equals(userUpdateForm.id)) {
@@ -155,7 +166,7 @@ public class UserController extends HomeController {
             String flash = "指定したユーザーにアクセスする権限はありません";
             redirectAttributes.addAttribute("flash", flash);
             redirectAttributes.addAttribute("articles", articleService.getAll());
-            return "redirect:/";
+            return "redirect:/?page=0";
         }
 
         if (bindingResult.hasErrors()) {
@@ -171,6 +182,6 @@ public class UserController extends HomeController {
             return "redirect:/user/edit/" + userUpdateForm.id;
         }
         userService.update(userUpdateForm);
-        return "redirect:/";
+        return "redirect:/?page=0";
     }
 }

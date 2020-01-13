@@ -31,6 +31,9 @@ public class ArticleController extends HomeController {
     @Autowired
     ArticleService articleService;
 
+    /** 記事一覧画面で取得するデータの上限数 */
+    private int limit = 15;
+
     /**
      * 記事一覧画面表示
      *
@@ -39,7 +42,6 @@ public class ArticleController extends HomeController {
      */
     @GetMapping(value = "/")
     public ModelAndView index(ModelAndView mav, @RequestParam int page) {
-        int limit = 15;
         int offset = PageUtil.calculatePageOffset(page, limit);
 
         mav.addObject("user", getUser());
@@ -64,8 +66,15 @@ public class ArticleController extends HomeController {
 
         ArticleDetailResponse response = articleService.detail(articleId);
         if (response == null) {
+            int page = 0;
+            int offset = PageUtil.calculatePageOffset(page, limit);
+
             mav.setViewName("articles/index");
             mav.addObject("flash", "指定した記事は存在しません");
+
+            mav.addObject(
+                    "articleIndexResponse",
+                    articleService.listing(offset, limit));
             return mav;
         }
         mav.setViewName("articles/show");
