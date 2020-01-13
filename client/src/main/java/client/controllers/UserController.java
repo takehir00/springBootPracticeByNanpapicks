@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
@@ -54,6 +55,7 @@ public class UserController extends HomeController {
      * @param userForm
      * @return
      */
+    @Transactional
     @PostMapping(value = "signUp")
     public String create(@ModelAttribute("userForm")UserForm userForm) {
         userService.create(userForm);
@@ -134,6 +136,7 @@ public class UserController extends HomeController {
      * @param userUpdateForm
      * @return
      */
+    @Transactional
     @PostMapping(value = "user/update")
     public String update(RedirectAttributes redirectAttributes,
                          @Validated @ModelAttribute("userUpdateForm")UserUpdateForm userUpdateForm,
