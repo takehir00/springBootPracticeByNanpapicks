@@ -32,7 +32,7 @@
         </div>
         <div class="user-article row px-1 pt-2 pb-4" th:each="article: ${response.articleModelList}">
             <img class="user-article-image col-sm-3" th:src="${article.imageUrl}" th:height="100" th:width="100"/>
-            <a class="user-article-title col-sm-9" href="users/editForm.html" th:href="@{/user/edit/{userId}(userId=${article.id})}">記事名</a>
+            <a class="user-article-title col-sm-9" href="users/editForm.html" th:href="@{/article/{articleId}(articleId=${article.id})}" th:text="${article.title}"></a>
         </div>
     </div>
 </div>
