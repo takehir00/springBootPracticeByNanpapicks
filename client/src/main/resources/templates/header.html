@@ -10,9 +10,6 @@
 </head>
 <body>
     <header class="navbar bg-dark navbar-dark" th:fragment="copy">
-        <div class="row" th:if="${flash != null}">
-            <div class="flash col-sm-12" th:text="${flash}"></div>
-        </div>
         <a th:href="@{/?page=1}" class="text-light navbar-brand">NANPA PICKS</a>
         <div class="my-2 my-lg-0">
             <a class="px-1" th:if="${user != null}" th:href="@{/user/{userId}(userId=${user.id})}" th:text="${user.name}"></a>

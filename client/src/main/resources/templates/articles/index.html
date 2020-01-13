@@ -10,6 +10,7 @@
 </head>
 <body>
     <div th:insert="~{header :: copy}"></div>
+    <div class="alert alert-secondary" th:if="${flash != null}" th:text="${flash}"></div>
     <div class="contents container">
         <div class="articles row">
             <div class="article col-sm-3" th:each="article : ${articleIndexResponse.articleList}">
