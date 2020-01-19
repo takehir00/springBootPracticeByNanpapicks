@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.1.6.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
+    id 'war'
 }
 
 group = 'com.nanpa'
@@ -22,12 +23,17 @@ repositories {
     mavenCentral()
 }
 
+bootRun {
+    main = 'nanpa_picks'
+}
+
 dependencies {
     implementation project(':db')
     implementation 'org.springframework.boot:spring-boot-starter-data-rest'
     implementation 'org.springframework.boot:spring-boot-starter-integration'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation 'org.springframework.session:spring-session-core'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
