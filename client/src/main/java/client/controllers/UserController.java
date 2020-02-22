@@ -6,6 +6,7 @@ import client.responses.users.UserShowResponse;
 import client.services.ArticleService;
 import client.services.UserService;
 import client.util.PageUtil;
+import client.validator.UserFormValidator;
 import db.entities.User;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -35,8 +37,16 @@ public class UserController extends HomeController {
     @Autowired
     ArticleService articleService;
 
+    @Autowired
+    UserFormValidator userFormValidator;
+
     @PersistenceContext
     EntityManager entityManager;
+
+    @InitBinder("userForm")
+    public void validationBinder(WebDataBinder binder) {
+        binder.addValidators(userFormValidator);
+    }
 
     /** 記事一覧画面で取得するデータの上限数 */
     private int limit = 15;
@@ -61,7 +71,17 @@ public class UserController extends HomeController {
      */
     @Transactional
     @PostMapping(value = "signUp")
-    public String create(@ModelAttribute("userForm")UserForm userForm) {
+    public String create(
+            @Validated @ModelAttribute("userForm")UserForm userForm,
+            BindingResult bindingResult,
+            RedirectAttributes attributes) {
+        if (bindingResult.hasErrors()) {
+            FieldError passwordConfirmError =
+                    bindingResult.getFieldError("passwordConfirm");
+            attributes.addFlashAttribute(
+                    "passwordConfirmError" , passwordConfirmError);
+            return "redirect:/user/registerForm";
+        }
         userService.create(userForm);
         return "redirect:/?page=0";
     }
