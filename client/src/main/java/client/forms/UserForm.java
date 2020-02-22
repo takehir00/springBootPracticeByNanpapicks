@@ -25,4 +25,7 @@ public class UserForm {
 
     @Size(max = 20, min = 4)
     public String password;
+
+    @Size(max = 20, min = 4)
+    public String passwordConfirm;
 }
