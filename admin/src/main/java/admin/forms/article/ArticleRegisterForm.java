@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 public class ArticleRegisterForm {
     @Tolerate
     public ArticleRegisterForm(){};
+    public Long id;
 
     @NotEmpty
     public String url;

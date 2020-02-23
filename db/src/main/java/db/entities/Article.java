@@ -1,9 +1,12 @@
 package db.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Data
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

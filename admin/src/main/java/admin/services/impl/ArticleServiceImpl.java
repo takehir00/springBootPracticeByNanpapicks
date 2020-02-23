@@ -8,6 +8,7 @@ import admin.util.PageUtil;
 import db.entities.Article;
 import db.repositories.ArticleRepository;
 import admin.services.ArticleService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -35,11 +36,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void create(ArticleRegisterForm articleForm) {
-        Article article = new Article();
-        article.url = articleForm.url;
-        article.title = articleForm.title;
-        article.imageUrl = articleForm.imageUrl;
-        articleRepository.create(article);
+        ModelMapper modelMapper = new ModelMapper();
+        Article articleModel = modelMapper.map(articleForm, Article.class);
+        articleRepository.create(articleModel);
     }
 
     @Override
