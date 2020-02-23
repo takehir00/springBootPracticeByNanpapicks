@@ -17,11 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class ArticleController {
+
     @Autowired
     ArticleService articleService;
 
@@ -74,7 +73,7 @@ public class ArticleController {
             return "redirect:/admin/article/registerForm";
         }
         articleService.create(articleRegisterForm);
-        return "redirect:/admin/article";
+        return "redirect:/admin/article?page=0";
     }
 
     /**
@@ -121,7 +120,7 @@ public class ArticleController {
             return "redirect:/admin/article/edit/" + articleUpdateForm.getId();
         }
         articleService.update(articleUpdateForm);
-        return "redirect:/admin/article";
+        return "redirect:/admin/article?page=0";
     }
 
     /**
@@ -157,7 +156,7 @@ public class ArticleController {
     @RequestMapping(value = "/admin/article/delete", method = RequestMethod.DELETE)
     public String delete(@ModelAttribute("articleForm") ArticleForm articleForm) {
         articleService.delete(articleForm);
-        return "redirect:/admin/article";
+        return "redirect:/admin/article?page=0";
     }
 
     /**
