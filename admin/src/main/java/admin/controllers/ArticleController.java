@@ -1,12 +1,15 @@
 package admin.controllers;
 
 
+import admin.common.FunctionNameAware;
 import admin.forms.article.ArticleForm;
 import admin.forms.article.ArticleRegisterForm;
 import admin.forms.article.ArticleUpdateForm;
 import admin.util.PageUtil;
 import db.entities.Article;
 import admin.services.ArticleService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,7 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.transaction.Transactional;
 
 @Controller
-public class ArticleController {
+public class ArticleController implements FunctionNameAware {
 
     @Autowired
     ArticleService articleService;
@@ -33,6 +36,8 @@ public class ArticleController {
     @Transactional
     @RequestMapping(value = "/admin/article", method = RequestMethod.GET)
     public ModelAndView top(ModelAndView mav, @RequestParam int page) {
+        Logger logger = LoggerFactory.getLogger("記事一覧画面にアクセス");
+        logger.debug("記事一覧画面にアクセス");
         mav = setArticleTopModelAndView(null, page);
         return mav;
     }
@@ -175,5 +180,10 @@ public class ArticleController {
         mav.addObject("pageCount", articleService.getPageCount(limit));
         mav.addObject("flash",flash);
         return mav;
+    }
+
+    @Override
+    public String getFunctionName() {
+        return "記事コントローラーーーー！！";
     }
 }
