@@ -36,8 +36,6 @@ public class ArticleController implements FunctionNameAware {
     @Transactional
     @RequestMapping(value = "/admin/article", method = RequestMethod.GET)
     public ModelAndView top(ModelAndView mav, @RequestParam int page) {
-        Logger logger = LoggerFactory.getLogger("記事一覧画面にアクセス");
-        logger.debug("記事一覧画面にアクセス");
         mav = setArticleTopModelAndView(null, page);
         return mav;
     }
@@ -184,6 +182,6 @@ public class ArticleController implements FunctionNameAware {
 
     @Override
     public String getFunctionName() {
-        return "記事コントローラーーーー！！";
+        return "Article Controller";
     }
 }
