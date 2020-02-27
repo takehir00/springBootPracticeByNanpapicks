@@ -47,4 +47,6 @@ dependencies {
     compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.5'
     compile group: 'org.springframework.security', name: 'spring-security-crypto', version: '5.2.0.RELEASE'
     compile "org.modelmapper:modelmapper:0.7.5"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.2.2.RELEASE'
+
 }
